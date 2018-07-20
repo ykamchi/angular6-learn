@@ -28,7 +28,8 @@ export class IssueService {
     return this.http.post(`${this.uri}/issues/add`, issue);
   }
 
-  updateIssue(id, title, responsible, description, severity) {
+  updateIssue(id, title, responsible, description, severity, status) {
+    
     const issue = {
       title: title, 
       responsible: responsible,
@@ -36,6 +37,7 @@ export class IssueService {
       severity: severity,
       status: status
     }
+    console.log('before post: ' + issue.responsible);
     return this.http.post(`${this.uri}/issues/update/${id}`, issue);
   }
 

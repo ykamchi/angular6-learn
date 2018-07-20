@@ -58,12 +58,11 @@ router.route('/issues/update/:id').post((req, res) => {
         if (!issue) {
             return next(new Error('Could not load document'));
         } else {
-            issue.title = req.body.titlel;
-            issue.resposible = req.body.resposible;
-            issue.decsription = req.body.description;
-            issue.severity = req.body.severity;
+            issue.title = req.body.title;
+            issue.responsible = req.body.responsible;
+            issue.description = req.body.description;
+            issue.severity = req.body.severity; 
             issue.status = req.body.status;
-            
             issue.save().then(issue => {
                 res.json('Update done');
             }).catch(err => {
@@ -74,7 +73,7 @@ router.route('/issues/update/:id').post((req, res) => {
 });
 
 
-router.route('/issues/delete/:id').post((req, res) => {
+router.route('/issues/delete/:id').get((req, res) => {
     Issue.findByIdAndRemove( { _id: req.params.id }, (err, issue) => {
         if (err) {
             res.json(err);

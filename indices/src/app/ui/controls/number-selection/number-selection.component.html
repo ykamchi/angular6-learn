@@ -1,0 +1,41 @@
+<!--input [(ngModel)]="val" (ngModelChange)="updateChanges()"-->
+<div>
+  <div class="border border-light" style="text-align:center">
+    {{val ? val : "Edit"}}
+  </div>
+  <div class="funkyradio">
+    <ng-container *ngFor="let param of optional_values">
+        <input type="radio" name="radio" [id]="'radio'+param.value" [value]="val" [checked]="param.value == val" 
+        (change)="selectionChanged(param.value)"/>
+        <label [for]="'radio'+param.value" [ngClass]="param.value == val ? 'col-6 col-sm-3 col-md-6 col-lg-3' + ' selected' : 'col-6 col-sm-3 col-md-6 col-lg-3' + ' not-selected'">{{param.name}}</label>
+    </ng-container>
+  </div>
+  <div style="font-size: 8px; text-align:center">
+    {{label}}
+  </div>
+</div>
+
+
+
+  <!--div class="funkyradio" style="height: 200px;overflow: auto;" >
+          <input type="radio" name="radio" id="radio1" [value]="1" [value]="val" [checked]="1 == val" (change)="selectionChanged(1)"/>
+          <label for="radio1" [ngClass]="1 === val ? 'col-sm-3 selected' : 'col-sm-3 not-selected'">1</label>
+          <input type="radio" name="radio" id="radio2" [value]="2" [value]="val" [checked]="2 == val" (change)="selectionChanged(2)"/>
+          <label for="radio2" [ngClass]="2 === val ? 'col-sm-3 selected' : 'col-sm-3 not-selected'">2</label>
+          <input type="radio" name="radio" id="radio3" [value]="3" [value]="val" [checked]="3 == val" (change)="selectionChanged(3)"/>
+          <label for="radio3" [ngClass]="3 === val ? 'col-sm-3 selected' : 'col-sm-3 not-selected'">3</label>
+          <input type="radio" name="radio" id="radio4" [value]="4" [value]="val" [checked]="4 == val" (change)="selectionChanged(4)"/>
+          <label for="radio4" [ngClass]="4 === val ? 'col-sm-3 selected' : 'col-sm-3 not-selected'">4</label>
+          <input type="radio" name="radio" id="radio5" [value]="5" [value]="val" [checked]="5 == val" (change)="selectionChanged(5)"/>
+          <label for="radio5" [ngClass]="5 === val ? 'col-sm-3 selected' : 'col-sm-3 not-selected'">5</label>
+          <input type="radio" name="radio" id="radio6" [value]="6" [value]="val" [checked]="6 == val" (change)="selectionChanged(6)"/>
+          <label for="radio6" [ngClass]="6 === val ? 'col-sm-3 selected' : 'col-sm-3 not-selected'">6</label>
+          <input type="radio" name="radio" id="radio7" [value]="7" [value]="val" [checked]="7 == val" (change)="selectionChanged(7)"/>
+          <label for="radio7" [ngClass]="7 === val ? 'col-sm-3 selected' : 'col-sm-3 not-selected'">7</label>
+          <input type="radio" name="radio" id="radio8" [value]="8" [value]="val" [checked]="8 == val" (change)="selectionChanged(8)"/>
+          <label for="radio8" [ngClass]="8 === val ? 'col-sm-3 selected' : 'col-sm-3 not-selected'">8</label>
+          <input type="radio" name="radio" id="radio9" [value]="9" [value]="val" [checked]="9 == val" (change)="selectionChanged(9)"/>
+          <label for="radio9" [ngClass]="9 === val ? 'col-sm-3 selected' : 'col-sm-3 not-selected'">9</label>
+          <input type="radio" name="radio" id="radio10" [value]="10" [value]="val" [checked]="10 == val" (change)="selectionChanged(10)"/>
+          <label for="radio10" [ngClass]="10 === val ? 'col-sm-3 selected' : 'col-sm-3 not-selected'">10</label>
+  </div-->

@@ -1,0 +1,27 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{header}}</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body" >
+  <p>{{msg}}</p>
+  <div *ngIf="type=='EMOJI'">
+    <div style="background: transparent; border:none;  outline:0px; font-size: 50px;height: 100%;width: 100%;vertical-align: top">{{val}}</div>
+  </div>
+  <input *ngIf="type=='INPUT'" [(ngModel)]="val">
+
+  <div style="height: 300px;overflow: auto;">
+  <div class="row" *ngIf="type=='EMOJI'" >
+    
+    <div  class="col-2 col-sm-2 col-md-2 col-lg-2" style="background: transparent; border:none;  outline:0px; font-size: 50px;height: 100%;width: 100%;vertical-align: top" 
+      *ngFor="let emoj of emojis" [innerHTML]="emoj" (click)="val=emoj"> 
+        {{emoji}}
+    </div>
+  </div>
+  </div> 
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="activeModal.close({'state': 'OK', 'val': val})">Ok</button>
+  <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('CANCEL')">Close</button>
+</div>

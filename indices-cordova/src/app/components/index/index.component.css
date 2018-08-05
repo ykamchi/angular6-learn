@@ -1,0 +1,46 @@
+.funkyradio div {
+    clear: both;
+    overflow: hidden;
+  }
+  
+  .funkyradio label {
+    width: 100%;
+    border-radius: 3px;
+    border: 1px solid #D1D3D4;
+    font-weight: normal;
+  }
+  
+  .funkyradio input[type="radio"]:empty {
+    display: none;
+  }
+
+  .funkyradio input[type="radio"]:empty ~ label {    
+    position: relative;
+    text-align: center;
+    
+    height: 30px;
+    line-height:30px;
+    margin-right: auto; 
+
+  }
+  
+  
+  
+  .funkyradio input[type="radio"]:hover:not(:checked) ~ label{
+    color: #888;
+  }
+  
+  
+  
+  .funkyradio input[type="radio"]:checked ~ label{
+    background: red;
+  }
+  
+  .relative {
+    position:relative;
+  }
+
+.full-width {
+    width: 100%;
+}
+

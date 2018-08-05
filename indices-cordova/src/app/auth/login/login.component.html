@@ -1,0 +1,41 @@
+<div style="text-align: center">
+    <br>
+    <h2>Login</h2>
+    <br>
+    <h6>indices</h6>
+    <br>
+    <br>
+</div>
+<div style="text-align: center">
+    <mat-form-field>
+        <mat-icon color="primary" matSuffix>face</mat-icon>    
+        <input matInput placeholder="User Name" type="text" [(ngModel)]="username">
+        
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+        <mat-icon color="primary" matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+        <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'" [(ngModel)]="password">
+        
+    </mat-form-field>
+    <br>
+    <br>
+    <div>
+        <mat-grid-list cols="17" rowHeight="60px">
+            <mat-grid-tile colspan="3" rowspan="1">
+            </mat-grid-tile>
+            <mat-grid-tile colspan="5" rowspan="1">
+                <button mat-stroked-button color="primary" [disabled]="loading" (click)="onRegister()">Register</button>
+            </mat-grid-tile>
+            <mat-grid-tile colspan="1" rowspan="1">
+            </mat-grid-tile>    
+            <mat-grid-tile colspan="5" rowspan="1">
+                <button mat-stroked-button color="primary" [disabled]="loading" (click)="onLogin()">Login</button>
+            </mat-grid-tile>
+            <mat-grid-tile colspan="3" rowspan="1">
+            </mat-grid-tile>
+        </mat-grid-list>
+        <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+    </div>
+    <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+</div>

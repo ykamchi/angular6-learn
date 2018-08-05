@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Indices</title>
+  <base href="./">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script type=”text/javascript” src=”cordova.js”></script>
+</head>
+<body oncontextmenu="return false">
+  <app-root></app-root>
+  <!--button onclick="startDictation()" src="//i.imgur.com/cHidSVu.gif">start</button>
+  
+  <script>
+      function startDictation() {
+    
+        if (window.hasOwnProperty('webkitSpeechRecognition')) {
+    
+          var recognition = new webkitSpeechRecognition();
+          recognition.continuous     = true;
+          recognition.continuous = true;
+          recognition.interimResults = false;
+
+          recognition.onstart = function() {
+            console.log("Recognition started");
+          };
+          recognition.onresult = function(event){
+            console.log(event.results[0][0].transcript);
+            startDictation();
+          };
+          recognition.onerror = function(e) {
+            console.log("Error " + e);
+          };
+
+          recognition.onend = function() {
+            console.log("Speech recognition ended ... restarting");
+            
+          };
+
+          recognition.lang = 'en-US'; // 'en-US' works too, as do many others
+          recognition.start();
+          
+        }
+      }
+  </script-->
+</body>
+</html>

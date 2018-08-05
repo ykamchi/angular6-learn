@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class IssueService {
   
-  uri = 'http://localhost:4000';
+  uri = 'http://10.0.0.9:4000';
 
   constructor(private http: HttpClient) { }
 

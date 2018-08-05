@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { File } from '@ionic-native/file';
+
 
 @Injectable({
   providedIn: 'root'
@@ -8,9 +10,12 @@ export class IssueService {
   
   uri = 'http://localhost:4000';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private file: File) { }
 
   getIssues() {
+    console.log("getIssues was called");
+    this.file.checkDir(this.file.dataDirectory, 'mydir').then(_ => console.log('Directory exists')).catch(err => console.log('Directory doesn\'t exist'));
+    
     return this.http.get(`${this.uri}/issues`);
   }
 

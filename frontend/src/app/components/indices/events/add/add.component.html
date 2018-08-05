@@ -1,0 +1,56 @@
+<div>
+  <form>
+    <div class="form-group">
+      <dl-date-time-picker ></dl-date-time-picker>
+      
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Password</label>
+      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+    </div>
+    <div class="form-group form-check">
+      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+      <label class="form-check-label" for="exampleCheck1">Check me out</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <dl-date-time-picker [(ngModel)]="model.date"></dl-date-time-picker>
+  </form>
+
+</div>
+<!--div>
+    <dl-date-time-picker [(ngModel)]="model.date"></dl-date-time-picker>
+    <input name="date" [(ngModel)]="model.date" required>
+          <mat-card>
+      <section class="mat-typography">
+        <h3>Add {{index_type.name}} Index</h3>
+      </section>
+      <mat-divider></mat-divider>
+      <br>
+      <form class="add-form" #thisForm="ngForm">
+        <mat-form-field color="accent" class="field-half-width-left">
+          <mat-label>Date</mat-label>
+          
+
+          <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field color="accent" class="field-half-width-right">
+          <input matInput placeholder="Time" aria-label="24hr format" [ngxTimepicker]="fullTime" [format]="24"  readonly style="width:50%" name="time" [(ngModel)]="model.time" required>
+          <ngx-material-timepicker #fullTime></ngx-material-timepicker>
+        </mat-form-field>
+
+        <br><br><br><br><br><br>
+        <input matInput type="text" name="ip-disabled" id="disabled-ip" value="Value (from 1 to 100)" disabled />
+        <br><br><br><br>
+
+        <mat-slider thumbLabel min="1" max="5" step="0.5" value="1.5" name="aa" [(ngModel)]="model.value" required></mat-slider>
+        <input matInput class="field-half-width-left" type="text" name="ip-disabled" id="disabled-ip" value="9999" disabled />
+        <input matInput class="field-half-width-right" type="text" name="ip-disabled" id="disabled-ip" style="text-align: right" value="99999" disabled />
+        <br><br><br><br><br><br>
+        <mat-divider></mat-divider>
+        <br><br>
+        <button mat-raised-button color="accent" routerLink="/list">Back</button>
+        <button type="submit" (click)="addIndex(model)" [disabled]="!thisForm.form.valid" mat-raised-button color="primary">Save</button>
+      </form>
+    </mat-card>
+  </div-->

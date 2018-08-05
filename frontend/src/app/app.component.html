@@ -1,6 +1,33 @@
-<mat-toolbar>
-  <span>Angulr 6 - MEAN Stack Sample Application</span>
-</mat-toolbar>
+<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-fixed-left">
+    <a class="navbar-brand">Indices Tracker</a>
+    <button class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-label="Toggle navigation"
+            [attr.aria-expanded]="!isCollapsed"
+            (click)="isCollapsed = !isCollapsed">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+  
+    <div class="collapse navbar-collapse"
+         id="navbarSupportedContent"
+         [ngClass]="{'show': !isCollapsed}">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link"
+             href="#">Link One</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link"
+             href="#">Link Two</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  
 <div>
+  
   <router-outlet></router-outlet>
 </div>

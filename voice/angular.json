@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "frontend": {
+    "voice": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/frontend",
+            "outputPath": "dist/voice",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -25,13 +25,7 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": [
-              "./node_modules/hammerjs/hammer.min.js",
-              "./node_modules/jquery/dist/jquery.js",
-              "./node_modules/tether/dist/js/tether.js",
-              
-              "./node_modules/moment/moment.js"
-            ]
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -56,18 +50,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "frontend:build"
+            "browserTarget": "voice:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "frontend:build:production"
+              "browserTarget": "voice:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "frontend:build"
+            "browserTarget": "voice:build"
           }
         },
         "test": {
@@ -101,7 +95,7 @@
         }
       }
     },
-    "frontend-e2e": {
+    "voice-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "architect": {
@@ -109,11 +103,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "frontend:serve"
+            "devServerTarget": "voice:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "frontend:serve:production"
+              "devServerTarget": "voice:serve:production"
             }
           }
         },
@@ -129,10 +123,5 @@
       }
     }
   },
-  "defaultProject": "frontend",
-  "schematics": {
-    "@schematics/angular:component": {
-      "styleext": "sass"
-    }
-  }
+  "defaultProject": "voice"
 }

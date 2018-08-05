@@ -1,0 +1,47 @@
+<div class="container-fluid"> <!-- container centers content on large screens -->
+  <div class="row">             <!-- responsive row has 12 columns by default -->
+    <div class="col col-6"  *ngFor="let index_type of indices">
+        <div class="card-img-top" (click)="addIndex(index_type)">
+            <img class="card-img-top" src="assets/images/default.png" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">{{index_type.name}}</h5>
+              <p class="card-text">last entry</p>
+              <!--a routerLink="/indices/add" class="btn btn-primary">Go somewhere</a-->
+            </div>
+          </div>
+          
+            <!-- uses 6 columns on medium and larger screens... -->
+    </div>
+  </div>
+</div>
+<!--button (click)="toggleVoiceRecognition()">{{ started ? 'Stop voice recognition' : 'Start voice recognition' }}</button>
+
+<div [ngSpeechContext]="['pizza']">
+    Say "pizza" and then choose your pizza
+    
+    <button (click)="order()" [ngSpeechActionContext]="['pizza']" ngSpeechActionCommand="hello" [ngSpeechAction]="order">Plus</button>
+    <button (click)="order()" [ngSpeechActionContext]="['pizza']" ngSpeechActionCommand="today" [ngSpeechAction]="order"></button>
+  </div-->
+  
+  
+
+<!--div class="demo-grid-list">
+
+    <mat-card>
+      <mat-card-title>Grid list with header</mat-card-title>
+      <mat-card-content>
+        <mat-grid-list cols="3">
+          <mat-grid-tile *ngFor="let index_type of indices">
+            <mat-grid-tile-header>
+                <div mat-card-avatar class="example-header-image"></div>
+                <mat-card-title>Shiba Inu</mat-card-title>
+                <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+              {{index_type.value}}
+            </mat-grid-tile-header>
+            <img [alt]="index_type.name" src="assets/images/default.png" style="width:20%">
+          </mat-grid-tile>
+        </mat-grid-list>
+      </mat-card-content>
+    </mat-card>
+  </div-->
+  

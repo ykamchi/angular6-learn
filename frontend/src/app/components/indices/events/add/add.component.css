@@ -1,0 +1,42 @@
+.add-form {
+    min-width: 150px;
+    width: 100%;
+}
+
+.field-full-width {
+    width: 100%;    
+}
+.field-half-width-left {
+    width: 45%;    
+    float: left;
+}
+.field-half-width-right {
+    width: 45%;    
+    float: right;
+}
+.mat-slider {
+    width: 100%;    
+}
+
+::ng-deep .mat-accent .mat-slider-thumb {
+    transform: scale(0) !important;
+    background-color: greenyellow;
+} 
+::ng-deep .mat-accent .mat-slider-thumb-label {
+    transform: rotate(45deg) !important;
+    border-radius: 50% 50% 0 !important;
+    background-color: greenyellow;
+} 
+::ng-deep .mat-accent .mat-slider-track-fill {
+    background-color: greenyellow;
+} 
+
+::ng-deep .mat-accent .mat-slider-ticks-container {
+    background: greenyellow;
+}
+
+
+::ng-deep .mat-accent .mat-slider-thumb-label-text {
+    
+    opacity: 1 !important;
+}

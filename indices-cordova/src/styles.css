@@ -1,7 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~bootstrap/dist/css/bootstrap.css";
 @import "~font-awesome/css/font-awesome.css";
+/*
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "~@angular/material/prebuilt-themes/pink-bluegrey.css";
+
+*/
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+
+
+
 
 .container-fluid {
     width: 100%;
@@ -18,3 +26,64 @@
 .button-row a {
   margin-right: 8px;
 }
+
+
+.app-top-panel {
+  background:rgb(81, 82, 80);
+  color:white;
+  width: 100%;
+  top:0px;
+  position: fixed;
+  height: 40px;
+  width: 100%;
+  margin-right: 8px;
+}
+
+.btn-panel {
+  background:rgb(81, 82, 80);
+  color:white;
+  width: 100%;
+  bottom:0px;
+  position: fixed;
+  height: 35px;
+  text-align: right;
+  margin-right: 8px;
+}
+
+.content-panel {
+  top: 140px;
+  bottom: 35px;
+  overflow: scroll;
+  position: fixed;
+  padding: 10px;
+  width: 100%;
+}
+
+.content-no-head-panel {
+  top: 40px;
+  bottom: 35px;
+  overflow: auto;
+  position: fixed;
+  padding: 10px;
+  width: 100%;
+}
+
+.no-head-panel {
+  visibility: hidden;
+  width: 100%;
+  top: 40px;
+  position: fixed;
+
+  
+  margin-right: 8px;
+}
+
+.head-panel {
+  width: 100%;
+  top: 40px;
+  position: fixed;
+  height: 100px;
+  
+  margin-right: 8px;
+}
+

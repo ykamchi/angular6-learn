@@ -16,8 +16,22 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 export class NumberSelectionComponent implements ControlValueAccessor, OnInit {
   @Input() label = "selection";
   @Input() optional_values: any;
+  @Input() container_size: string;
+  @Input() height: string;
+  @Input() show_value: boolean = false;
+  columns_class: any = {
+       "small": "col-12 col-sm-5 col-md-3 col-lg-2",
+       "medium": "col-2 col-sm-2 col-md-2 col-lg-2",
+       "large": "col-1 col-sm-1 col-md-1 col-lg-1"
+  }
+  
   @Output() valuechange = new EventEmitter(); // add this
-
+  
+  constructor() {
+    if (!this.container_size) this.container_size = "small";
+    if (!this.height) this.height = "230px";
+  }
+  
   private local_val: number = -1;
 
   selectionChanged(newVal) {
@@ -41,6 +55,8 @@ export class NumberSelectionComponent implements ControlValueAccessor, OnInit {
   }
   
   ngOnInit() {
+
+    console.log("xxxx" + this.container_size);
 
   }
   /**
@@ -75,7 +91,7 @@ export class NumberSelectionComponent implements ControlValueAccessor, OnInit {
    * @param value the value
    */
   writeValue(value: number): void {
-    console.log("** writeValue");
+    console.log("** writeValue"); 
     this.val = value;
     //this.onChange(this.val);
   }

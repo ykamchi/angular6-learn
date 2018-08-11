@@ -116,17 +116,18 @@ router.route('/indices/users/reg').post((req, res) => {
 });
 // route middleware to verify a token
 router.use(function(req, res, next) {
-
+    console.log("Request to authenticate: " + req);
     // check header or url parameters or post parameters for token
     var token = req.body.token || req.query.token || req.headers['x-access-token'];
-    
+    console.log("Request to authenticate: token found" + token);
     // decode token
     if (token) {
   
       // verifies secret and checks exp
       jwt.verify(token, app.get('secret'), function(err, decoded) {      
         if (err) {
-          return res.json({ success: false, message: 'Failed to authenticate token.' });    
+            console.log("Request to authenticate: token verification failed - " + token);
+            return res.status(401).send({ success: false, message: 'Failed to authenticate token.' });    
         } else {
           // if everything is good, save to request for use in other routes
           req.decoded = decoded; 
@@ -219,15 +220,46 @@ router.route('/indices/indices.types/delete/:id').post((req, res) => {
 
 router.route('/indices/indices.types/update/:id').post((req, res) => {
     let query = {};
-    query._id =  req.params.id;
-    query.user = req.username;
-    IndexType.update(query, {
-        emoji: req.body.emoji,
-        hidden: req.body.hidden,
-    }, function(err, affected, resp) {
-        res.json(err);
-    });
+    console.log("req.params._id: " + req.body._id);
+    if (req.body._id) {
+        console.log("Edit type");
+        req.body.last_update = new Date();
+        query._id =  req.params.id;
+        query.user = req.username;
+        IndexType.update(query, {
+            emoji: req.body.emoji,
+            hidden: req.body.hidden,
+            caption: req.body.caption,
+            category: req.body.category,
+            'sub-category': req.body['sub-category'],
+            name: req.body.name,
+            type: req.body.type,
+            from: req.body.from,
+            to: req.body.to,
+            step: req.body.step,
+            day_parts: req.body.day_parts,
+            last_update: req.body.last_update
+        }).then(index_type => {
+            console.log(req.body);
+            res.status(200).json(req.body);
+        }).catch(err => {
+            res.status(400).send('Failed to update new record'+err);
+        });
+    } else {
+        console.log("New type: " + req.body.caption);
+        req.body.last_update = new Date();
+        req.body.user = req.username;
+        var x = new IndexType(req.body);
 
+        x.save()
+            .then(index_type => {
+                console.log(index_type);
+                res.status(200).json(index_type);
+            })
+            .catch(err => {
+                res.status(400).send('Failed to create new record'+err);
+            });
+    }
 }); 
 
 

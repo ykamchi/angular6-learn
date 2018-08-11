@@ -1,61 +1,79 @@
-
-<mat-grid-list cols="17" rowHeight="60px">
-  <mat-grid-tile colspan="1" rowspan="1">
-  </mat-grid-tile>
-  <mat-grid-tile colspan="7" rowspan="1">
-    <mat-form-field style="width:100%">
-      <mat-select #category (selectionChange)="category_changed()" [(ngModel)]="selected_category">
-        <mat-option *ngFor='let category of categories' [value]="category">{{category}}</mat-option>
-      </mat-select>
-    </mat-form-field>
-  </mat-grid-tile>
-  <mat-grid-tile colspan="1" rowspan="1">
-  </mat-grid-tile>
-  <mat-grid-tile colspan="7" rowspan="1">
-    <mat-form-field style="width:100%">
-      <mat-select #sub_category [(ngModel)]="selected_sub_category">
-        <mat-option *ngFor='let sub_category of sub_categories' [value]="sub_category">{{sub_category}}</mat-option>
-      </mat-select>
-    </mat-form-field>
-  </mat-grid-tile>
-  <mat-grid-tile colspan="1" rowspan="1">
-  </mat-grid-tile>
-</mat-grid-list>
-
-
-<div class="container-fluid">
-  <div class="row">            
-    <div class="col-6 col-sm-4 col-md-3 col-lg-3"  *ngFor="let index_type of (indices_types | indices_filter : edit_mode:selected_category:selected_sub_category | indices_sort)" style="padding: 5px">
-      <div class="bg-light" style="padding: 5px;height: 100%;" (click)="edit_mode ? '' : navigate(index_type)">
-        <mat-card class="example-card" style="height: 100%">
-          <mat-card-header>
-            <mat-card-title>{{index_type.category}}</mat-card-title>
-            <mat-card-subtitle>{{index_type['sub-category']}}</mat-card-subtitle>
-          </mat-card-header>
-          <mat-card-content>
-            <div (click)="edit_mode ? select_emoji(index_type) : ''">
-              <h5 class="h5-caption" [innerHTML]="index_type.emoji"></h5>
-              <h5 style="text-align: center"  >{{index_type.caption}}</h5> 
-            </div>
-          </mat-card-content>
-          <mat-card-actions *ngIf="edit_mode">
-              <mat-checkbox color="primary" [(ngModel)]="index_type.hidden" (change)="update_index(index_type)">Hidden</mat-checkbox>
-              <button mat-stroked-button color="primary" (click)="clone_index(index_type)">Clone</button>
-              <button mat-stroked-button color="primary" (click)="delete_index(index_type)">Delete</button>
-            </mat-card-actions>
-          </mat-card>
+<div [ngClass]="show_head_panel ? 'head-panel' : 'no-head-panel'">
+  
+  <mat-grid-list cols="17" rowHeight="60px">
+    <mat-grid-tile colspan="1" rowspan="1">
+    </mat-grid-tile>
+    <mat-grid-tile colspan="7" rowspan="1">
+      <mat-form-field style="width:100%">
+        <mat-select #category (selectionChange)="category_changed()" [(ngModel)]="selected_category">
+          <mat-option *ngFor='let category of categories' [value]="category">{{category}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1" rowspan="1">
+    </mat-grid-tile>
+    <mat-grid-tile colspan="7" rowspan="1">
+      <mat-form-field style="width:100%">
+        <mat-select #sub_category [(ngModel)]="selected_sub_category">
+          <mat-option *ngFor='let sub_category of sub_categories' [value]="sub_category">{{sub_category}}</mat-option>
+        </mat-select> 
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1" rowspan="1">
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
+<!-- style="overflow: scroll" (window:resize)="onResize($event)" [style.width]="innerWidth + 'px'" [style.height]="innerHeight + 'px'"-->
+<div [ngClass]="show_head_panel ? 'content-panel' : 'content-no-head-panel'">
+  <div class="container-fluid">
+    <div class="row">            
+      <div ngClass="col-6 col-sm-4 col-md-3 col-lg-3" *ngFor="let index_type of (indices_types | indices_filter : show_hidden:selected_category:selected_sub_category | indices_sort)" style="padding: 5px">
+        <div class="box-shadow" style="height: 100%">
+          <div style="text-align: center;padding:5px" (click)="navigate(index_type)">
+            <h5 class="h5-caption"  [innerHTML]="index_type.emoji"></h5>
+            <span><h6 style="text-align: center;word-wrap: break-word;height: 45px"  >{{index_type.caption}}</h6></span>
+            <span style="font-size: 10px">{{index_type.category}}/{{index_type['sub-category']}}</span>
+          </div>
+          <div style="text-align: right">
+            <button mat-icon-button color="primary" (click)="clone_index(index_type)"><mat-icon>file_copy</mat-icon></button>
+            <button mat-icon-button color="primary" (click)="edit_index(index_type)"><mat-icon>edit</mat-icon></button>
+            
+          </div>
+          
+        </div>
       </div>
     </div>
   </div>
 </div>
 
-<br>
-<div style="text-align: center">
+<div class="btn-panel">
   <div class="button-row">
-    <button mat-stroked-button color="primary" (click)="edit_mode = !edit_mode">New</button> 
-    <button mat-stroked-button [color]="edit_mode ? 'warn' : 'primary'" (click)="edit_mode = !edit_mode">{{edit_mode ? 'Done' : 'Edit'}}</button> 
+    {{show_hidden ? 'Only Active:' : 'Show hidden:'}}<button mat-icon-button [style.color]="show_hidden ? 'red' : 'white'" (click)="show_hidden = !show_hidden"><mat-icon>block</mat-icon></button> 
+    Add:<button mat-icon-button (click)="new_index()"><mat-icon>add</mat-icon></button> 
+    Filter:<button mat-icon-button (click)="toggle_filter()"><mat-icon>filter_list</mat-icon></button> 
+    
   </div>
 </div>
+
+<!--mat-card class="example-card" style="height: 100%;">
+    <mat-card-header>
+      <mat-card-title>{{index_type.category}}</mat-card-title>
+      <mat-card-subtitle>{{index_type['sub-category']}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content (click)="navigate(index_type)">
+      <div>
+        <h5 class="h5-caption" [innerHTML]="index_type.emoji"></h5>
+        <h5 style="text-align: center"  >{{index_type.caption}}</h5> 
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      
+      <button mat-icon-button [color]="index_type.hidden ? 'warn' : 'primary'" (click)="hide_index(index_type)"><mat-icon>block</mat-icon></button>
+
+      <button mat-icon-button color="primary" (click)="edit_index(index_type)"><mat-icon>edit</mat-icon></button>
+      <button mat-icon-button color="primary" (click)="clone_index(index_type)"><mat-icon>file_copy</mat-icon></button>
+    </mat-card-actions>
+  </mat-card-->
 
 <!--div class="dropdown btn bg-secondary" *ngIf="newname==true" style="position: absolute;z-index:10;padding: 10px" [ngStyle]="{'left.px': contextmenuX, 'top.px': contextmenuY}">
   <input type="text" class="custom-select" #newname>
@@ -63,3 +81,24 @@
   <button mat-stroked-button color="primary" (click)="clone_send(newname.value)">Ok</button>
   <button mat-stroked-button color="primary" (click)="clone_canel()">Cancel</button>
 </div-->
+
+
+          <!--mat-card-actions *ngIf="show_hidden" >
+              <mat-grid-list cols="2" rowHeight="60px">
+                <mat-grid-tile colspan="1" rowspan="1">
+                  <button mat-stroked-button style="min-width: 1%" color="primary" (click)="edit_index(index_type)">Edit </button>
+                </mat-grid-tile>
+                <mat-grid-tile colspan="1" rowspan="1">
+                  <button mat-stroked-button style="min-width: 1%" [color]="index_type.hidden ? 'warn' : 'primary'" (click)="index_type.hidden = !index_type.hidden">{{index_type.hidden ? 'Show' : 'Hide'}}</button>
+                  
+                </mat-grid-tile>
+  
+                <mat-grid-tile colspan="1" rowspan="1">
+                  <button mat-stroked-button style="min-width: 1%" color="primary" (click)="clone_index(index_type)">Clone</button>
+                </mat-grid-tile>
+                <mat-grid-tile colspan="1" rowspan="1">
+                  <button mat-stroked-button style="min-width: 1%" color="primary" (click)="delete_index(index_type)">Delete</button>
+                </mat-grid-tile>
+              </mat-grid-list>
+            </mat-card-actions>
+          </mat-card-->

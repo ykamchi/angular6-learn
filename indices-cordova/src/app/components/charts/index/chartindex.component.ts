@@ -3,7 +3,7 @@ import { ActivatedRoute} from '@angular/router';
 import { IndicesService } from '../../../services/indices.service';
 import { Location } from '@angular/common';
 import { Chart } from 'chart.js';
-import { isInteger } from '../../../../../node_modules/@ng-bootstrap/ng-bootstrap/util/util';
+
 
 @Component({
   selector: 'app-chartindex',

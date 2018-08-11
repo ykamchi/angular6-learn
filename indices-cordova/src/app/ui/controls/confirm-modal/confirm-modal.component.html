@@ -6,20 +6,30 @@
 </div>
 <div class="modal-body" >
   <p>{{msg}}</p>
+
   <div *ngIf="type=='EMOJI'">
     <div style="background: transparent; border:none;  outline:0px; font-size: 50px;height: 100%;width: 100%;vertical-align: top">{{val}}</div>
-  </div>
-  <input *ngIf="type=='INPUT'" [(ngModel)]="val">
-
-  <div style="height: 300px;overflow: auto;">
-  <div class="row" *ngIf="type=='EMOJI'" >
-    
-    <div  class="col-2 col-sm-2 col-md-2 col-lg-2" style="background: transparent; border:none;  outline:0px; font-size: 50px;height: 100%;width: 100%;vertical-align: top" 
-      *ngFor="let emoj of emojis" [innerHTML]="emoj" (click)="val=emoj"> 
-        {{emoji}}
+    <div style="height: 300px;overflow: auto;">
+      <div  class="col-2 col-sm-2 col-md-2 col-lg-2" style="background: transparent; border:none;  outline:0px; font-size: 50px;height: 100%;width: 100%;vertical-align: top" *ngFor="let emoj of emojis" [innerHTML]="emoj" (click)="val=emoj"> 
+      {{emoji}}
+      </div>
     </div>
   </div>
+
+  <div *ngIf="type=='INPUT'">
+    <input [(ngModel)]="val">  
   </div> 
+
+  <div *ngIf="type=='TIME'">
+    <div class="container-fluid"> 
+      <div class="row" > 
+  
+        <app-number-selection (valuechange)="hour_changed()" [label]="Hour" [optional_values]="hours" [(ngModel)]="hour"></app-number-selection>
+        <app-number-selection (valuechange)="minute_changed()" [label]="Minute" [optional_values]="minutes" [(ngModel)]="minute"></app-number-selection>
+      </div>
+    </div>
+  </div>
+
 </div>
 <div class="modal-footer">
   <button type="button" class="btn btn-outline-dark" (click)="activeModal.close({'state': 'OK', 'val': val})">Ok</button>

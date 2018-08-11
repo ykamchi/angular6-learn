@@ -8,9 +8,12 @@ import { MatSelectModule } from '@angular/material';
 import { MatButtonModule } from '@angular/material';
 import { MatGridListModule } from '@angular/material';
 import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from "@angular/material/icon"; 
 
 
 
+
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 
 import { NgModule } from '@angular/core';
 
@@ -21,7 +24,8 @@ import { AppComponent } from './app.component';
 import { UiModule } from './ui/ui.module';
 import { MainComponent, IndicesFilterPipe, IndicesSortPipe } from './components/main/main.component';
 import { RouterModule, Routes  } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+
 import { IndexComponent } from './components/index/index.component';
 import { WindowRefService } from './services/Window-ref.service';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
@@ -30,7 +34,8 @@ import 'hammerjs';
 import { HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { ChartIndexComponent } from './components/charts/index/chartindex.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-
+import { IndexEditComponent } from './components/index-edit/index-edit.component';
+import { JwtInterceptor, ErrorInterceptor } from './helpers';
 
 
 
@@ -44,6 +49,7 @@ export class CustomHammerConfig extends HammerGestureConfig  {
 const routes: Routes = [
   { path: 'main', component: MainComponent, canActivate: [AuthGuard] },
   { path: 'index', component: IndexComponent, canActivate: [AuthGuard] }, 
+  { path: 'newindex', component: IndexEditComponent, canActivate: [AuthGuard] }, 
   { path: 'chartindex', component: ChartIndexComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: '', redirectTo:  '/main', pathMatch: 'full' } ,
@@ -57,7 +63,8 @@ const routes: Routes = [
     IndexComponent,
     IndicesFilterPipe,
     IndicesSortPipe,
-    ChartIndexComponent
+    ChartIndexComponent,
+    IndexEditComponent
   ], 
   imports: [
     RouterModule.forRoot(routes),
@@ -77,13 +84,19 @@ const routes: Routes = [
     MatSelectModule,
     MatGridListModule,
     MatCardModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatIconModule,
+    NgxMaterialTimepickerModule.forRoot()
   ],
-  providers: [ WindowRefService,
+  providers: [ 
+    WindowRefService,
     {
       provide: HAMMER_GESTURE_CONFIG,
       useClass: CustomHammerConfig
-    }
+    },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+
   ],
   
   bootstrap: [AppComponent]

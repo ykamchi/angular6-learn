@@ -1135,7 +1135,7 @@ module.exports = "\r\n\r\n.full-width {\r\n    width: 100%;\r\n}\r\n\r\n"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n<mat-grid-list cols=\"17\" rowHeight=\"60px\">\n  <mat-grid-tile colspan=\"1\" rowspan=\"1\">\n  </mat-grid-tile>\n  <mat-grid-tile colspan=\"7\" rowspan=\"1\">\n    <mat-form-field style=\"width:100%\">\n      <mat-select #category (selectionChange)=\"category_changed()\" [(ngModel)]=\"selected_category\">\n        <mat-option *ngFor='let category of categories' [value]=\"category\">{{category}}</mat-option>\n      </mat-select>\n    </mat-form-field>\n  </mat-grid-tile>\n  <mat-grid-tile colspan=\"1\" rowspan=\"1\">\n  </mat-grid-tile>\n  <mat-grid-tile colspan=\"7\" rowspan=\"1\">\n    <mat-form-field style=\"width:100%\">\n      <mat-select #sub_category [(ngModel)]=\"selected_sub_category\">\n        <mat-option *ngFor='let sub_category of sub_categories' [value]=\"sub_category\">{{sub_category}}</mat-option>\n      </mat-select>\n    </mat-form-field>\n  </mat-grid-tile>\n  <mat-grid-tile colspan=\"1\" rowspan=\"1\">\n  </mat-grid-tile>\n</mat-grid-list>\n\n\n<div class=\"container-fluid\">\n  <div class=\"row\">            \n    <div class=\"col-6 col-sm-4 col-md-3 col-lg-3\"  *ngFor=\"let index_type of (indices_types | indices_filter : edit_mode:selected_category:selected_sub_category | indices_sort)\" style=\"padding: 5px\">\n      <div class=\"bg-light\" style=\"padding: 5px;height: 100%;\" (click)=\"edit_mode ? '' : navigate(index_type)\">\n        <mat-card class=\"example-card\" style=\"height: 100%\">\n          <mat-card-header>\n            <mat-card-title>{{index_type.category}}</mat-card-title>\n            <mat-card-subtitle>{{index_type['sub-category']}}</mat-card-subtitle>\n          </mat-card-header>\n          <mat-card-content>\n            <div (click)=\"edit_mode ? select_emoji(index_type) : ''\">\n              <h5 class=\"h5-caption\" [innerHTML]=\"index_type.emoji\"></h5>\n              <h5 style=\"text-align: center\"  >{{index_type.caption}}</h5> \n            </div>\n          </mat-card-content>\n          <mat-card-actions *ngIf=\"edit_mode\">\n              <mat-checkbox color=\"primary\" [(ngModel)]=\"index_type.hidden\" (change)=\"update_index(index_type)\">Hidden</mat-checkbox>\n              <button mat-stroked-button color=\"primary\" (click)=\"clone_index(index_type)\">Clone</button>\n              <button mat-stroked-button color=\"primary\" (click)=\"delete_index(index_type)\">Delete</button>\n            </mat-card-actions>\n          </mat-card>\n      </div>\n    </div>\n  </div>\n</div>\n\n<br>\n<div style=\"text-align: center\">\n  <div class=\"button-row\">\n    <button mat-stroked-button color=\"primary\" (click)=\"edit_mode = !edit_mode\">New</button> \n    <button mat-stroked-button [color]=\"edit_mode ? 'warn' : 'primary'\" (click)=\"edit_mode = !edit_mode\">{{edit_mode ? 'Done' : 'Edit'}}</button> \n  </div>\n</div>\n\n<!--div class=\"dropdown btn bg-secondary\" *ngIf=\"newname==true\" style=\"position: absolute;z-index:10;padding: 10px\" [ngStyle]=\"{'left.px': contextmenuX, 'top.px': contextmenuY}\">\n  <input type=\"text\" class=\"custom-select\" #newname>\n  <br><br>\n  <button mat-stroked-button color=\"primary\" (click)=\"clone_send(newname.value)\">Ok</button>\n  <button mat-stroked-button color=\"primary\" (click)=\"clone_canel()\">Cancel</button>\n</div-->"
+module.exports = "\n<mat-grid-list cols=\"17\" rowHeight=\"60px\">\n  <mat-grid-tile colspan=\"1\" rowspan=\"1\">\n  </mat-grid-tile>\n  <mat-grid-tile colspan=\"7\" rowspan=\"1\">\n    <mat-form-field style=\"width:100%\">\n      <mat-select #category (selectionChange)=\"category_changed()\" [(ngModel)]=\"selected_category\">\n        <mat-option *ngFor='let category of categories' [value]=\"category\">{{category}}</mat-option>\n      </mat-select>\n    </mat-form-field>\n  </mat-grid-tile>\n  <mat-grid-tile colspan=\"1\" rowspan=\"1\">\n  </mat-grid-tile>\n  <mat-grid-tile colspan=\"7\" rowspan=\"1\">\n    <mat-form-field style=\"width:100%\">\n      <mat-select #sub_category [(ngModel)]=\"selected_sub_category\">\n        <mat-option *ngFor='let sub_category of sub_categories' [value]=\"sub_category\">{{sub_category}}</mat-option>\n      </mat-select>\n    </mat-form-field>\n  </mat-grid-tile>\n  <mat-grid-tile colspan=\"1\" rowspan=\"1\">\n  </mat-grid-tile>\n</mat-grid-list>\n\n\n<div class=\"container-fluid\">\n  <div class=\"row\">            \n    <div *ngFor=\"let index_type of (indices_types | indices_filter : edit_mode:selected_category:selected_sub_category | indices_sort)\" style=\"padding: 5px\">\n      <div class=\"bg-light\" style=\"padding: 5px;height: 100%;\" (click)=\"edit_mode ? '' : navigate(index_type)\">\n        <mat-card class=\"example-card\" style=\"height: 100%\">\n          <mat-card-header>\n            <mat-card-title>{{index_type.category}}</mat-card-title>\n            <mat-card-subtitle>{{index_type['sub-category']}}</mat-card-subtitle>\n          </mat-card-header>\n          <mat-card-content>\n            <div (click)=\"edit_mode ? select_emoji(index_type) : ''\">\n              <h5 class=\"h5-caption\" [innerHTML]=\"index_type.emoji\"></h5>\n              <h5 style=\"text-align: center\"  >{{index_type.caption}}</h5> \n            </div>\n          </mat-card-content>\n          <mat-card-actions *ngIf=\"edit_mode\">\n              <mat-checkbox color=\"primary\" [(ngModel)]=\"index_type.hidden\" (change)=\"update_index(index_type)\">Hidden</mat-checkbox>\n              <br>\n              <button mat-stroked-button color=\"primary\" (click)=\"clone_index(index_type)\">Clone</button>\n              <br>\n              <button mat-stroked-button color=\"primary\" (click)=\"delete_index(index_type)\">Delete</button>\n            </mat-card-actions>\n          </mat-card>\n      </div>\n    </div>\n  </div>\n</div>\n\n<br>\n<div style=\"text-align: center\">\n  <div class=\"button-row\">\n    <button mat-stroked-button color=\"primary\" (click)=\"edit_mode = !edit_mode\">New</button> \n    <button mat-stroked-button [color]=\"edit_mode ? 'warn' : 'primary'\" (click)=\"edit_mode = !edit_mode\">{{edit_mode ? 'Done' : 'Edit'}}</button> \n  </div>\n</div>\n\n<!--div class=\"dropdown btn bg-secondary\" *ngIf=\"newname==true\" style=\"position: absolute;z-index:10;padding: 10px\" [ngStyle]=\"{'left.px': contextmenuX, 'top.px': contextmenuY}\">\n  <input type=\"text\" class=\"custom-select\" #newname>\n  <br><br>\n  <button mat-stroked-button color=\"primary\" (click)=\"clone_send(newname.value)\">Ok</button>\n  <button mat-stroked-button color=\"primary\" (click)=\"clone_canel()\">Cancel</button>\n</div-->"
 
 /***/ }),
 
@@ -1905,7 +1905,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-toolbar color=\"primary\">\n    <mat-toolbar-row>\n      \n      <button mat-icon-button [matMenuTriggerFor]=\"menu\">\n          <mat-icon>more_vert</mat-icon>\n        </button>\n        <mat-menu #menu=\"matMenu\">\n          <button mat-menu-item>\n            <mat-icon>dialpad</mat-icon>\n            <span>Redial</span>\n          </button>\n          <button mat-menu-item disabled>\n            <mat-icon>exit_to_app</mat-icon>\n            \n            <span><a href=\"/login\">Logout</a></span>\n            \n          </button>\n          <button mat-menu-item>\n            <mat-icon>notifications_off</mat-icon>\n            <span>Disable alerts</span>\n          </button>\n        </mat-menu>\n        <span>{{username}}</span>\n    </mat-toolbar-row>\n  \n   \n  </mat-toolbar>"
+module.exports = "<mat-toolbar color=\"primary\">\n    <mat-toolbar-row>\n      \n      <button mat-icon-button [matMenuTriggerFor]=\"menu\">\n          <mat-icon>more_vert</mat-icon>\n        </button>\n        <mat-menu #menu=\"matMenu\">\n          <button mat-menu-item>\n            <mat-icon>dialpad</mat-icon>\n            <span>Redial</span>\n          </button>\n          <button mat-menu-item enabled (click)=\"logout()\">\n            <mat-icon>exit_to_app</mat-icon>\n            \n          </button>\n          <button mat-menu-item>\n            <mat-icon>notifications_off</mat-icon>\n            <span>Disable alerts</span>\n          </button>\n        </mat-menu>\n        <span>{{username}}</span>\n    </mat-toolbar-row>\n  \n   \n  </mat-toolbar> "
 
 /***/ }),
 
@@ -1920,6 +1920,8 @@ module.exports = "<mat-toolbar color=\"primary\">\n    <mat-toolbar-row>\n      
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HeaderComponent", function() { return HeaderComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _auth_auth_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../auth/auth.service */ "./src/app/auth/auth.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1930,8 +1932,12 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
+
 var HeaderComponent = /** @class */ (function () {
-    function HeaderComponent() {
+    function HeaderComponent(router, authenticationService) {
+        this.router = router;
+        this.authenticationService = authenticationService;
     }
     Object.defineProperty(HeaderComponent.prototype, "username", {
         get: function () {
@@ -1942,13 +1948,18 @@ var HeaderComponent = /** @class */ (function () {
     });
     HeaderComponent.prototype.ngOnInit = function () {
     };
+    HeaderComponent.prototype.logout = function () {
+        console.log("logout");
+        this.authenticationService.logout();
+        this.router.navigate(["login"]);
+    };
     HeaderComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-header',
             template: __webpack_require__(/*! ./header.component.html */ "./src/app/ui/header/header.component.html"),
             styles: [__webpack_require__(/*! ./header.component.css */ "./src/app/ui/header/header.component.css")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], _auth_auth_service__WEBPACK_IMPORTED_MODULE_1__["AuthService"]])
     ], HeaderComponent);
     return HeaderComponent;
 }());

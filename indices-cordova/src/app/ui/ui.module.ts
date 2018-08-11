@@ -11,7 +11,11 @@ import { ConfirmModalComponent } from './controls/confirm-modal/confirm-modal.co
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material';
 import { MatMenuModule } from '@angular/material/menu';
-import { MatIconModule } from "@angular/material/icon"; 
+import { MatIconModule } from "@angular/material/icon";
+import { MatGridListModule } from '@angular/material';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { TimeSelectionComponent } from './controls/time-selection/time-selection.component'; 
+
 
 
 
@@ -22,21 +26,27 @@ import { MatIconModule } from "@angular/material/icon";
     MatToolbarModule,
     MatButtonModule,
     MatMenuModule,
-    MatIconModule
+    MatIconModule,
+    MatGridListModule,
+    MatFormFieldModule
   ],
   declarations: [
     LayoutComponent, 
     HeaderComponent, 
     FooterComponent, 
     NumberSelectionComponent,
+    TimeSelectionComponent,
     ContextmenuComponent,
-    ConfirmModalComponent
+    ConfirmModalComponent,
+    TimeSelectionComponent
   ],
   exports: [
     LayoutComponent,
     NumberSelectionComponent,
+    TimeSelectionComponent,
     ContextmenuComponent,
     ConfirmModalComponent
+    
     
   ],
   entryComponents: [ ConfirmModalComponent ]

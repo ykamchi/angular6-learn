@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute, Router, NavigationExtras} from '@angular/router';
 import { IndicesService } from '../../services/indices.service';
-
+import { WindowRefService } from '../../services/Window-ref.service';
 
 @Component({
   selector: 'app-index',
@@ -20,8 +20,13 @@ export class IndexComponent {
   test: Date;
   index: any = {};
   
+  //innerHeight: number;
+  //innerWidth: number;
+  constructor(private route: ActivatedRoute ,private indicesService : IndicesService, private router: Router, private location: Location, private winRef: WindowRefService) { 
+    //this.innerWidth = winRef.nativeWindow.innerWidth;
+    //this.innerHeight = winRef.nativeWindow.innerHeight-240;
+    
 
-  constructor(private route: ActivatedRoute ,private indicesService : IndicesService, private router: Router, private location: Location) { 
     this.route.queryParams.subscribe((params: any) => {
       this.index_type = params;
     });
@@ -37,7 +42,12 @@ export class IndexComponent {
       }
     }  
   } 
-  
+
+  // onResize(event) {
+  //   this.innerWidth = event.target.innerWidth;
+  //   this.innerHeight = event.target.innerHeight-240;
+  // }
+
   public set current_date(v : Date) {
     this._current_date = v;
     this.get_index();

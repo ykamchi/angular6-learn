@@ -1,5 +1,4 @@
-<div (swiperight)="swipe($event, -1)" (swipeleft)="swipe($event, 1)" >
-    <br>
+<div class="head-panel" (swiperight)="swipe($event, -1)" (swipeleft)="swipe($event, 1)" >
     <div class="container-fluid"> 
         <div class="row" > 
             <div class="col-4">
@@ -21,13 +20,16 @@
             </div>
         </div>
     </div>
+</div>
+<!--style="background: firebrick; overflow: scroll" (window:resize)="onResize($event)" [style.width]="innerWidth + 'px'" [style.height]="innerHeight + 'px'"-->
+<div class="content-panel">
     <div class="container-fluid"> 
         <div [ngSwitch]="index.tracking">
             <div *ngSwitchCase="'day-parts'">
                 
                 <div class="row" > 
-                    <div class="col-3 col-sm-2 col-md-3 col-lg-3" *ngFor="let day_part of index.day_parts; let i=index">
-                        <app-number-selection (valuechange)="save_index()" [label]="day_part.part" [optional_values]="optional_values" [(ngModel)]="day_part.value"></app-number-selection>
+                    <div class="col-3 col-sm-3 col-md-2 col-lg-2" *ngFor="let day_part of index.day_parts; let i=index">
+                        <app-number-selection height="190px" (valuechange)="save_index()" [label]="day_part.part" [optional_values]="optional_values" [(ngModel)]="day_part.value"></app-number-selection>
                         <!--input [(ngModel)]="day_part.value"-->
                     </div>
                     
@@ -42,17 +44,12 @@
             <div>
                 <label style="font-size: 8px">Last updated on: {{index.last_update}}</label>
             </div>
-            <br>
-            <div class="row" > 
-                
-                <div class="col-12" style="text-align: center">
-                    <div class="button-row">
-                        <button mat-stroked-button color="primary" (click)="open_chart()">Graph</button> 
-                        <button mat-stroked-button color="primary" (click)="goBack()">Back</button> 
-                    </div>
-                </div>
-                
-            </div>
         </div>
+    </div>
+</div>
+<div class="btn-panel">
+    <div class="button-row">
+        <button mat-icon-button (click)="open_chart()"><mat-icon>insert_chart</mat-icon></button> 
+        <button mat-icon-button (click)="goBack()"><mat-icon>replay</mat-icon></button> 
     </div>
 </div>

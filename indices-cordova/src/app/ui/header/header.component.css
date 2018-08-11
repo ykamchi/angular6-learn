@@ -1,0 +1,11 @@
+.mat-toolbar.mat-primary{
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 9;
+}
+
+.fa-heart {
+    color: skyblue;
+}

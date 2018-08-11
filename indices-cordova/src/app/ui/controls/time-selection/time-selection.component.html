@@ -1,0 +1,25 @@
+<input class="timeinput" type="text" [(ngModel)]="initial_value" (click)="toggle($event)" (ngModelChange)="updateChanges()" readOnly="readOnly">
+<div id="overlay"  [style.display]="show ? 'block' : 'none'" (click)="close(false)">
+</div>
+<div class="timepicker" [style.display]="show ? 'block' : 'none'">
+    <span class="mat-calendar-period-button mat-button">Select Time - {{val}}</span>
+    
+    <div class="container-fluid" style="padding: 5px"> 
+        <div class="row"> 
+            <div class="col-12">
+                <app-number-selection height="135px" container_size="medium" (valuechange)="change_hour()" [label]="'Hours'" [optional_values]="hours" [(ngModel)]="hour"></app-number-selection>
+            </div>
+        </div>
+        <div class="row"> 
+            <div class="col-7">
+                <app-number-selection height="70px" container_size="medium" (valuechange)="change_minute()" [label]="'Minutes'" [optional_values]="minutes" [(ngModel)]="minute"></app-number-selection>           
+            </div>
+            <div class="col-5">
+                <div class="button-row" style="width:100%">
+                    <button mat-stroked-button color="primary" (click)="close(false)">Cancel</button> 
+                    <button mat-stroked-button color="primary" (click)="close(true)">Ok</button> 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

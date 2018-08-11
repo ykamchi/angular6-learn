@@ -4,19 +4,20 @@ import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
 import { IndicesTypesService } from '../../services/indices-types.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmModalComponent } from '../../ui/controls/confirm-modal/confirm-modal.component';
+import { WindowRefService } from '../../services/Window-ref.service';
 //import SpeechToText from 'speech-to-text'
 //import { WindowRefService } from '../../services/Window-ref.service';
 
 @Pipe({ name: 'indices_filter' })
 export class IndicesFilterPipe implements PipeTransform {   
-    transform(indices: any[], edit_mode:boolean, category:string , sub_category:string) {
+    transform(indices: any[], show_hidden:boolean, category:string , sub_category:string) {
       console.log('filter called');
       if (!indices) return indices;
       return indices.filter((index) => {
         let ret = false;         
         if ((category == 'All' || category == index.category) &&
             (sub_category == 'All' || sub_category == index['sub-category']) &&
-            (edit_mode || !index.hidden)) {
+            (show_hidden || !index.hidden)) {
               return index;
             }
       });
@@ -44,13 +45,15 @@ export class MainComponent {
   sub_categories: string[]; 
   selected_category: string = 'All';
   selected_sub_category: string = 'All';
-  edit_mode: boolean = false;
+  show_hidden: boolean = false;
+  show_head_panel: boolean = false;
 
   constructor(  private router: Router
                 ,private route: ActivatedRoute
                 ,private indicesTypesService : IndicesTypesService
                 ,private modalService: NgbModal
-                /*,private winRef: WindowRefService*/
+                ,private winRef: WindowRefService
+                
               ) { 
     /*
     if (window.hasOwnProperty('webkitSpeechRecognition')) {
@@ -74,6 +77,8 @@ export class MainComponent {
       }
     }
     */
+    //this.innerWidth = winRef.nativeWindow.innerWidth;
+    //this.innerHeight = winRef.nativeWindow.innerHeight-185;
     console.log("MAIN");
     this.indicesTypesService.getCategories().subscribe((data: string[]) => {
       this.categories = data;
@@ -83,11 +88,28 @@ export class MainComponent {
     });
   }
 
+  onResize(event) {
+    //this.innerWidth = event.target.innerWidth;
+    //this.innerHeight = event.target.innerHeight-185;
+  } 
+
+  toggle_filter() {
+    this.show_head_panel = !this.show_head_panel;
+  }
+
   navigate(index_type) {
-    console.log("navigate: " + this.edit_mode);
-    if (this.edit_mode) return;
     let navigationExtras: NavigationExtras = { queryParams: index_type };
     this.router.navigate(["index"], navigationExtras);
+  }
+
+  edit_index(index_type) {
+    let navigationExtras: NavigationExtras = { queryParams: {index_type: JSON.stringify(index_type)} };
+    this.router.navigate(["newindex"], navigationExtras);
+  }
+
+  new_index() {
+    
+    this.router.navigate(["newindex"]);
   }
 
   category_changed() {
@@ -107,6 +129,14 @@ export class MainComponent {
     });
   }
 
+  hide_index(index_type) {
+    index_type.hidden = !index_type.hidden;
+    this.indicesTypesService.updateIndex(index_type).subscribe((data: string[]) => {
+      this.getIndices();
+    });
+
+  }
+
   update_index(index_type) {
     this.indicesTypesService.updateIndex(index_type).subscribe((data: string[]) => {
       this.getIndices();
@@ -114,7 +144,6 @@ export class MainComponent {
   }
  
   clone_index(index_type) {
-    if (!this.edit_mode) return;
     const modalRef = this.modalService.open(ConfirmModalComponent, {ariaLabelledBy: 'modal-basic-title'});
     modalRef.componentInstance.header = 'Clone Index: ' + index_type.caption;
     modalRef.componentInstance.msg = 'Select name for the new Index and press OK';
@@ -134,7 +163,6 @@ export class MainComponent {
   }
  
   select_emoji(index_type) {
-    if (!this.edit_mode) return;
     const modalRef = this.modalService.open(ConfirmModalComponent, {ariaLabelledBy: 'modal-basic-title'});
     modalRef.componentInstance.header = 'Select Emoji for Index: ' + index_type.caption;
     modalRef.componentInstance.msg = 'Select Emoji from the list and press OK';
@@ -149,7 +177,6 @@ export class MainComponent {
   }
     
   delete_index(index_type) {
-    if (!this.edit_mode) return;
     const modalRef = this.modalService.open(ConfirmModalComponent, {ariaLabelledBy: 'modal-basic-title'});
     modalRef.componentInstance.header = 'Delete Index: ' + index_type.caption;
     modalRef.componentInstance.msg = 'Are you sure you want to delete Index: ' + index_type.caption;

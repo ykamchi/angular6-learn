@@ -42,13 +42,4 @@ export class AuthService {
         localStorage.removeItem('currentuser');
         localStorage.removeItem('token');
     }
-
-    httpOptions() {
-        return  {
-            headers: new HttpHeaders({
-              'Content-Type':  'application/json',
-              'x-access-token': localStorage.getItem('token')
-            })
-          };
-    }
 } 

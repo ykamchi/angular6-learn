@@ -1,0 +1,91 @@
+
+<div [ngClass]="show_head_panel ? 'content-panel' : 'content-no-head-panel'">
+  <mat-grid-list cols="12" rowHeight="65px">
+    <mat-grid-tile colspan="4" rowspan="3">
+      <div (click)="select_emoji(index_type)" style="text-align: center">
+        <h5 class="h5-caption" [innerHTML]="index_type.emoji"></h5>
+        <span style="font-size: 10px">Click to select emoji</span>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="8" rowspan="1">
+      <mat-form-field class="example-form-field">
+        <input matInput type="text" placeholder="Caption" [(ngModel)]="index_type.caption">
+      </mat-form-field> 
+    </mat-grid-tile>
+
+    <mat-grid-tile colspan="8" rowspan="1">
+      <mat-form-field class="example-form-field">
+        <input matInput type="text" placeholder="Category" [(ngModel)]="index_type.category">
+      </mat-form-field> 
+    </mat-grid-tile>
+    <mat-grid-tile colspan="8" rowspan="1">
+      <mat-form-field class="example-form-field">
+        <input matInput type="text" placeholder="Sub-Category" [(ngModel)]="index_type['sub-category']">
+      </mat-form-field> 
+    </mat-grid-tile>
+
+
+    <mat-grid-tile colspan="6" rowspan="1">
+      <mat-form-field style="width: 100%">
+        <mat-label>Type</mat-label>
+        <mat-select [(ngModel)]="index_type.type" #type>
+          <mat-option value="number">number</mat-option>
+          <mat-option value="string">string</mat-option>
+        </mat-select>
+      </mat-form-field>  
+    </mat-grid-tile>
+    <div *ngIf="index_type.type === 'number'">
+      <mat-grid-tile colspan="2" rowspan="1">
+        <mat-form-field style="width: 30px">
+          <input matInput type="text" placeholder="From" [(ngModel)]="index_type.from">
+        </mat-form-field>  
+      </mat-grid-tile>
+
+      <mat-grid-tile colspan="2" rowspan="1">
+        <mat-form-field style="width: 30px">
+          <input matInput type="text" placeholder="To" [(ngModel)]="index_type.to">
+        </mat-form-field>  
+      </mat-grid-tile>
+
+      <mat-grid-tile colspan="2" rowspan="1">
+        <mat-form-field style="width: 30px">
+          <input matInput type="text" placeholder="Step" [(ngModel)]="index_type.step">
+        </mat-form-field>  
+      </mat-grid-tile>
+    </div>      
+  </mat-grid-list>
+  <div class="container-fluid">
+    <div class="row" style="padding-bottom: 5px">
+      <div class="col-4" *ngFor="let day_part of index_type.day_parts ; let i = index" style="padding: 0px;padding-bottom: 5px">
+        <div>
+          <app-time-selection [id]="i" (valuechange)="day_part_changed(i)" [(ngModel)]="index_type.day_parts[i]"></app-time-selection>
+          <button mat-icon-button color="warn" (click)="delete_time(i)">
+            <mat-icon aria-label="Example icon-button with a heart icon">delete</mat-icon>
+          </button>
+        </div>
+      </div>
+      <div>
+        <app-time-selection [id]="i" (valuechange)="add_time()" [(ngModel)]="time_to_add"></app-time-selection>
+        <button mat-icon-button color="primary" (click)="add_time()">
+            <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+  <br>
+  {{index_type.hidden ? 'This index is hidden ... click "Show" if you like to see it on the main page': ''}}
+  <div class="button-row" style="width:100%">
+    <button mat-stroked-button [color]="index_type.hidden ? 'primary' : 'warn'" (click)="index_type.hidden = ! index_type.hidden">{{index_type.hidden ? 'Show' : 'Hide'}}</button>    
+    <button mat-stroked-button color="primary" (click)="clone_index()">Clone</button>  
+
+    <button mat-stroked-button color="warn" (click)="delete_index()">Delete</button>    
+    
+  </div>
+
+
+</div>
+<div class="btn-panel">
+    <div class="button-row">
+      <button mat-icon-button [color]="primary" (click)="goBack()"><mat-icon>replay</mat-icon></button> 
+    </div>
+</div>

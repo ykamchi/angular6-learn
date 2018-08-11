@@ -1,27 +1,24 @@
-
-<div (swiperight)="swipe($event, -1)" (swipeleft)="swipe($event, 1)" >
-  <br>
-  <div style="text-align: center">
-      <br>
-      <h2>{{index_caption}}</h2>
-      <br>
-      <h5 class="h5-caption" [innerHTML]="index_emoji"></h5>
-      <br>
-      <br>
-  </div>
-  <div>
-    <canvas  #myCanvas>{{ chart }}</canvas>
-  </div>
-  <br>
-  <br>
-  <div class="container-fluid"> 
-    <div class="row" > 
-      <div class="col-12" style="text-align: center">
-        <div class="button-row">
-          <button mat-stroked-button color="primary" (click)="open_chart()">Graph</button> 
-          <button mat-stroked-button color="primary" (click)="goBack()">Back</button> 
-        </div>
-      </div>
+<div [ngClass]="'content-no-head-panel'">
+  <div (swiperight)="swipe($event, -1)" (swipeleft)="swipe($event, 1)" >
+    <br>
+    <div style="text-align: center">
+        <br>
+        <h2>{{index_caption}}</h2>
+        <br>
+        <h5 class="h5-caption" [innerHTML]="index_emoji"></h5>
+        <br>
+        <br>
     </div>
+    <div>
+      <canvas  #myCanvas>{{ chart }}</canvas>
+    </div>
+    
+  </div>
+</div>
+
+<div class="btn-panel">
+  <div class="button-row">
+      <button mat-icon-button [color]="primary" (click)="goBack()"><mat-icon>replay</mat-icon></button> 
+    
   </div>
 </div>

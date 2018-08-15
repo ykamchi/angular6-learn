@@ -28,7 +28,7 @@ import { RouterModule, Routes  } from '@angular/router';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { IndexComponent } from './components/index/index.component';
-import { WindowRefService } from './services/Window-ref.service';
+import { WindowRefService } from './services/window-ref.service';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import 'hammerjs';

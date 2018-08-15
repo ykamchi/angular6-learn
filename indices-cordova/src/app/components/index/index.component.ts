@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute, Router, NavigationExtras} from '@angular/router';
 import { IndicesService } from '../../services/indices.service';
-import { WindowRefService } from '../../services/Window-ref.service';
+import { WindowRefService } from '../../services/window-ref.service';
 
 @Component({
   selector: 'app-index',

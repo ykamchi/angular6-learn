@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, NavigationExtras} from '@angular/router';
+import { ActivatedRoute} from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { IndicesTypesService } from '../../services/indices-types.service';
 import { ConfirmModalComponent } from '../../ui/controls/confirm-modal/confirm-modal.component';

@@ -4,7 +4,7 @@ import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
 import { IndicesTypesService } from '../../services/indices-types.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmModalComponent } from '../../ui/controls/confirm-modal/confirm-modal.component';
-import { WindowRefService } from '../../services/Window-ref.service';
+import { WindowRefService } from '../../services/window-ref.service';
 //import SpeechToText from 'speech-to-text'
 //import { WindowRefService } from '../../services/Window-ref.service';
 

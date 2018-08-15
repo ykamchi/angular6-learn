@@ -1,5 +1,5 @@
 import { Component, OnInit   } from '@angular/core';
-import { WindowRefService } from '../../services/Window-ref.service';
+import { WindowRefService } from '../../services/window-ref.service';
 
 @Component({
   selector: 'app-layout',

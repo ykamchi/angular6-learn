@@ -19,10 +19,13 @@ export class ConfigService {
         
         
         console.log("config=" + this._config);
-        this.http.get<any>(`assets/env.json`).subscribe((env: {}) => {
-            this._config = env;
-            console.log("config=" + this._config);
-        });
+        this.http.get<any>(`assets/env.json`).subscribe(
+            (env) => {
+                this._config = env;
+                console.log("config=" + this._config);
+                        },
+            error => console.log("error: " + error)
+        );
         
     } 
 

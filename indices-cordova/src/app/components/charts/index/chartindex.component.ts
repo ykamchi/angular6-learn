@@ -22,7 +22,6 @@ export class ChartIndexComponent implements OnInit {
   
   constructor(private indicesService : IndicesService, private route: ActivatedRoute, private location: Location) { 
     this.route.queryParams.subscribe((params: any) => {
-      console.log("aaaaaaaaaaaaaaa" + params.index_type);
       this.index_id = params.index_id;
       this.index_caption = params.index_caption;
       this.index_emoji = params.index_emoji;
@@ -32,7 +31,6 @@ export class ChartIndexComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.myCanvas);
     var data1 = [];
     var data2 = [];
     var labels = [];
@@ -41,9 +39,7 @@ export class ChartIndexComponent implements OnInit {
       
       if (data && data.length > 0) {
         let tmp = [];
-        console.log(data);
         data.forEach(index => {
-          console.log(index.date);
           if (index.day_parts && index.day_parts.length > 0) {
             index.day_parts.sort(function(a, b){return a.value-b.value}).reverse().forEach(part => {
               var myRegexp = /(\d*):(\d*)/g;

@@ -17,7 +17,6 @@ export class IndexComponent {
   
   optional_values: any = [];
   current_date: Date;
-  test: Date;
   index: any = {};
   time_to_add: string = "Add";
   
@@ -40,19 +39,19 @@ export class IndexComponent {
   } 
 
   date_changed() {
-    console.log("current_date: this.current_date");
+    //console.log("current_date: this.current_date");
     this.get_index();
   }
 
   delete_time(i) {
-    console.log("Delete Time");
+    //console.log("Delete Time");
     this.index.day_parts.splice( i, 1 );
     this.save_index();
 
   }
 
   add_time() {
-    console.log("Add Time");
+    //console.log("Add Time");
     this.index.day_parts.push({part: this.time_to_add, value: null});
     this.save_index();
     this.time_to_add = "Add";
@@ -60,30 +59,30 @@ export class IndexComponent {
 
   /*
   public set current_date(v : Date) {
-    console.log("set Current Date");
+    //console.log("set Current Date");
     this._current_date = v;
     this.get_index();
   }
   
   public get current_date() : Date {
-    console.log("get Current Date");
+    //console.log("get Current Date");
     return this._current_date;
   }
   */
   swipe(e: TouchEvent, days) {
-    console.log("Swipe: " + days);
+    //console.log("Swipe: " + days);
     let tmp = new Date(this.current_date);
     tmp.setDate( this.current_date.getDate() + days );
     let today = new Date();
     if (tmp <= today) {
-      console.log("try to change date");
+      //console.log("try to change date");
       this.current_date = tmp;
       this.get_index();
     }
   }
   
   open_chart() {
-    console.log("Open Chart");
+    //console.log("Open Chart");
     let navigationExtras: NavigationExtras = { 
             queryParams: { 
               index_id: this.index_type._id, 
@@ -95,31 +94,27 @@ export class IndexComponent {
   }
 
   save_index() {
-    console.log("Save Index");
+    //console.log("Save Index");
     this.indicesService.saveIndex(this.index).subscribe(data => {
-      this.day_parts.forEach(day_part => {
-        console.log(day_part.part + " = " + day_part.value);
-      });
-      
       this.get_index();
     });
   }
 
   goBack(): void {
-    console.log("Go Back");
+    //console.log("Go Back");
     this.location.back();
   }
 
   get_index() {
-    console.log("Get Index");
+    //console.log("Get Index");
     this.indicesService.getIndex(this.index_type._id, this.current_date).subscribe((data: any []) => {
-      console.log(data);
+      //console.log(data);
       if (data.length == 1) {
         this.index = data[0];
         this.index.day_parts.sort((a, b) => {return a.part > b.part});
-
+        
       } else if (data.length == 0) { 
-        console.log("created new: "+this.index);
+        //console.log("created new: "+this.index);
         this.index = {
           date: this.current_date,
           index_type_id: this.index_type._id,
@@ -133,7 +128,7 @@ export class IndexComponent {
           this.index.day_parts.sort((a, b) => {return a.part > b.part});
         } 
       } else {
-        console.log("Error: should not get more than one index for {type=t, date:d}");
+        //console.log("Error: should not get more than one index for {type=t, date:d}");
       }
     });
 

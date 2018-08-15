@@ -11,7 +11,7 @@ import { WindowRefService } from '../../services/window-ref.service';
 @Pipe({ name: 'indices_filter' })
 export class IndicesFilterPipe implements PipeTransform {   
     transform(indices: any[], show_hidden:boolean, category:string , sub_category:string) {
-      console.log('filter called');
+      //console.log('filter called');
       if (!indices) return indices;
       return indices.filter((index) => {
         let ret = false;         
@@ -27,7 +27,7 @@ export class IndicesFilterPipe implements PipeTransform {
 @Pipe({ name: 'indices_sort' })
 export class IndicesSortPipe implements PipeTransform {
   transform(indices: any[]) {
-    console.log('sort called');
+    //console.log('sort called');
     if (!indices) return indices;
     return indices.sort((a,b) => a.caption.localeCompare(b.caption));
   }
@@ -79,7 +79,7 @@ export class MainComponent {
     */
     //this.innerWidth = winRef.nativeWindow.innerWidth;
     //this.innerHeight = winRef.nativeWindow.innerHeight-185;
-    console.log("MAIN");
+    //console.log("MAIN");
     this.indicesTypesService.getCategories().subscribe((data: string[]) => {
       this.categories = data;
       this.categories.unshift('All');
@@ -124,8 +124,6 @@ export class MainComponent {
   getIndices() {
     this.indicesTypesService.getIndices(this.selected_category, this.selected_sub_category).subscribe((data: any[]) => {
       this.indices_types = data;
-      console.log('getIndices called');
-      
     });
   }
 
@@ -148,7 +146,7 @@ export class MainComponent {
     modalRef.componentInstance.header = 'Clone Index: ' + index_type.caption;
     modalRef.componentInstance.msg = 'Select name for the new Index and press OK';
     modalRef.componentInstance.type = 'INPUT';
-    modalRef.componentInstance.val = 'Copy Of - ' + index_type.name;
+    modalRef.componentInstance.val = 'Copy Of - ' + index_type.caption;
     modalRef.result.then((result) => {
       if (result.state === 'OK') {
         console.log('Closed with result: OK'); 

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ConfigService } from './config.service';
+import { environment } from '../../environments/environment';
 
 
 @Injectable({
@@ -8,21 +8,19 @@ import { ConfigService } from './config.service';
 })
 export class IndicesService {
   
-  constructor(private http: HttpClient, private config: ConfigService) { }
+  constructor(private http: HttpClient) { }
 
   getIndex(type_id, date) {
-    let uri = this.config.getParam('backend_uri');
-    return this.http.get(`${uri}/indices/indices.values/${type_id}/${date}`);
+    
+    return this.http.get(`${environment.backend_uri}/indices/indices.values/${type_id}/${date}`);
   }
 
   getIndices(type_id) {
-    let uri = this.config.getParam('backend_uri');
-    return this.http.get(`${uri}/indices/indices.values/${type_id}`);
+    return this.http.get(`${environment.backend_uri}/indices/indices.values/${type_id}`);
   }
 
   saveIndex(index) {
-    let uri = this.config.getParam('backend_uri');
-    return this.http.post(`${uri}/indices/indices.values/save`, index);
+    return this.http.post(`${environment.backend_uri}/indices/indices.values/save`, index);
   }
 
 }

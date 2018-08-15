@@ -37,10 +37,6 @@ import { ChartIndexComponent } from './components/charts/index/chartindex.compon
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { IndexEditComponent } from './components/index-edit/index-edit.component';
 import { JwtInterceptor, ErrorInterceptor } from './helpers';
-import { ConfigService } from './services/config.service';
-
-
-
 
 export class CustomHammerConfig extends HammerGestureConfig  {
     overrides = <any>{
@@ -48,13 +44,6 @@ export class CustomHammerConfig extends HammerGestureConfig  {
         'rotate': { enable: false }
     }
 } 
-
-const appInitializerFn = (appConfig: ConfigService) => {
-  return () => {
-    console.log("appInitializerFn");
-    return appConfig.loadConfig();
-  };
-};
 
 const routes: Routes = [
   { path: 'main', component: MainComponent, canActivate: [AuthGuard] },
@@ -100,12 +89,6 @@ const routes: Routes = [
     NgxMaterialTimepickerModule.forRoot()
   ],
   providers: [ 
-    {
-      provide: APP_INITIALIZER,
-      useFactory: appInitializerFn,
-      multi: true,
-      deps: [ConfigService]
-    },
     WindowRefService,
     {
       provide: HAMMER_GESTURE_CONFIG,

@@ -12,7 +12,7 @@
         <input matInput type="text" placeholder="Caption" [(ngModel)]="index_type.caption">
       </mat-form-field> 
     </mat-grid-tile>
-
+    
     <mat-grid-tile colspan="8" rowspan="1">
       <mat-form-field>
         <input matInput type="text" placeholder="Category" [(ngModel)]="index_type.category" [matAutocomplete]="auto">
@@ -76,7 +76,7 @@
       </div>
       <div>
         <app-time-selection [id]="i" (valuechange)="add_time()" [(ngModel)]="time_to_add"></app-time-selection>
-        <!--button mat-icon-button color="primary" (click)="add_time()"><mat-icon>add</mat-icon></button-->
+        
       </div>
     </div>
   </div>

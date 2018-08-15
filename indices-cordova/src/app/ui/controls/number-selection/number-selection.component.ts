@@ -35,7 +35,7 @@ export class NumberSelectionComponent implements ControlValueAccessor, OnInit {
   private val: number = -1;
 
   selectionChanged(newVal) {
-    console.log("[number-selection] selectionChanged: " + newVal);
+    //console.log("[number-selection] selectionChanged: " + newVal);
     this.val = newVal;
     this.onChange(this.val);
     this.valuechange.emit(event);    
@@ -43,14 +43,14 @@ export class NumberSelectionComponent implements ControlValueAccessor, OnInit {
 
   /*
   public set val(v : number) {
-    console.log("[number-selection] set val: " + v);
+    //console.log("[number-selection] set val: " + v);
     this.local_val = v;
     //this.valuechange.emit(event);
   }
   
   
   public get val() : number {
-    console.log("[number-selection] get val");
+    //console.log("[number-selection] get val");
     return this.local_val;
   }
   */
@@ -62,21 +62,21 @@ export class NumberSelectionComponent implements ControlValueAccessor, OnInit {
    * Invoked when the model has been changed
    */
   onChange: (_: any) => void = (_: any) => {
-    console.log("[number-selection] onChange");
+    //console.log("[number-selection] onChange");
   };
 
   /**
    * Invoked when the model has been touched
    */
   onTouched: () => void = () => {
-    console.log("[number-selection] onTouched");
+    //console.log("[number-selection] onTouched");
   };
   
   /**
    * Method that is invoked on an update of a model.
    */
   updateChanges() {
-    console.log("[number-selection] updateChanges");
+    ////console.log("[number-selection] updateChanges");
     this.onChange(this.val);
     this.valuechange.emit(event);    
   }
@@ -90,7 +90,7 @@ export class NumberSelectionComponent implements ControlValueAccessor, OnInit {
    * @param value the value
    */
   writeValue(value: number): void {
-    console.log("[number-selection] writeValue"); 
+    ////console.log("[number-selection] writeValue"); 
     this.val = value;
     //this.onChange(this.val);
   }

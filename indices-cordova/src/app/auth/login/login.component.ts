@@ -49,12 +49,9 @@ export class LoginComponent implements OnInit {
             .pipe(first())
             .subscribe(
                 data => {
-                    console.log("###### ok : " + this.returnUrl);
                     this.router.navigate([this.returnUrl]);
                 },
                 err => {
-
-                    console.log("###### error: " + this.returnUrl+" "+err.error);
                     this.error = err.error;
                     this.loading = false;
                 });
@@ -64,7 +61,6 @@ export class LoginComponent implements OnInit {
         this.authenticationService.register(this.username, this.password)
             .subscribe(
                 data => {
-                    console.log("###### : " + this.returnUrl);
                     this.onLogin();
                 },
                 error => {

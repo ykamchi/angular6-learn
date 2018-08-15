@@ -31,10 +31,10 @@ export class IndexEditComponent implements OnInit {
 
     this.route.queryParams.subscribe((params: any) => {
       if (params.index_type) {
-        console.log("edit index");
+        //console.log("edit index");
         this.index_type = JSON.parse(params.index_type);
       } else {
-        console.log("new index");
+        //console.log("new index");
         this.index_type = {
           name: "New Index",
           caption: "New Caption",
@@ -65,7 +65,7 @@ export class IndexEditComponent implements OnInit {
   }
 
   update_index() {
-    console.log("update_index");
+    //console.log("update_index");
     this.index_type['day_parts'].sort();
     this.indicesTypesService.updateIndex(this.index_type).subscribe((data: string[]) => {
       this.index_type = data;
@@ -88,11 +88,11 @@ export class IndexEditComponent implements OnInit {
     });
   }
   day_part_changed(i, val) {
-    console.log("day_part_changed: " + val + " " + this.index_type['day_parts'][i]);
+    //console.log("day_part_changed: " + val + " " + this.index_type['day_parts'][i]);
   }
   
   add_time() {
-    console.log("Add Time");
+    //console.log("Add Time");
     this.index_type['day_parts'].push(this.time_to_add);
     this.update_index();
     this.time_to_add = "Add";
@@ -100,7 +100,7 @@ export class IndexEditComponent implements OnInit {
   }
 
   delete_time(i) {
-    console.log("Delete Time");
+    //console.log("Delete Time");
     this.index_type['day_parts'].splice( i, 1 );
     this.update_index();
 

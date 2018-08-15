@@ -19,7 +19,11 @@ app.use(bodyParser.json());
 app.set('secret', "Austin03"); // secret variable
 
 //mongoose.connect('mongodb://localhost:27017/indices');
-mongoose.connect('mongodb+srv://admin:admin@cluster0-mseur.mongodb.net/indices?retryWrites=true');
+mongoose.connect('mongodb+srv://admin:admin@cluster0-mseur.mongodb.net/indices?retryWrites=true', function(err) {
+	if (err) 
+		console.log("error connecting to DB: " + err)
+}
+);
 
 const connection = mongoose.connection;
 
@@ -68,6 +72,7 @@ router.route('/indices/users/auth').post((req, res) => {
                     expiresIn: 3600 // expires in 24 hours
                     
                 });
+		console.log("Auth OK for: " + str);
                 // return the information including token as JSON
                 res.status(200).json({ 
                     username: req.body.username,

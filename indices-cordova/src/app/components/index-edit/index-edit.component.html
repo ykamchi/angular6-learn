@@ -8,19 +8,31 @@
       </div>
     </mat-grid-tile>
     <mat-grid-tile colspan="8" rowspan="1">
-      <mat-form-field class="example-form-field">
+      <mat-form-field>
         <input matInput type="text" placeholder="Caption" [(ngModel)]="index_type.caption">
       </mat-form-field> 
     </mat-grid-tile>
 
     <mat-grid-tile colspan="8" rowspan="1">
-      <mat-form-field class="example-form-field">
-        <input matInput type="text" placeholder="Category" [(ngModel)]="index_type.category">
+      <mat-form-field>
+        <input matInput type="text" placeholder="Category" [(ngModel)]="index_type.category" [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let option of categories " [value]="option">
+            {{option}}
+          </mat-option>
+        </mat-autocomplete>
       </mat-form-field> 
     </mat-grid-tile>
     <mat-grid-tile colspan="8" rowspan="1">
-      <mat-form-field class="example-form-field">
-        <input matInput type="text" placeholder="Sub-Category" [(ngModel)]="index_type['sub-category']">
+      <mat-form-field>
+        <input matInput type="text" placeholder="Sub Category" [(ngModel)]="index_type['sub-category']" [matAutocomplete]="auto1">
+        <mat-autocomplete #auto1="matAutocomplete">
+          <mat-option *ngFor="let option of sub_categories " [value]="option">
+            {{option}}
+          </mat-option>
+        </mat-autocomplete>
+  
+        
       </mat-form-field> 
     </mat-grid-tile>
 
@@ -59,16 +71,12 @@
       <div class="col-4" *ngFor="let day_part of index_type.day_parts ; let i = index" style="padding: 0px;padding-bottom: 5px">
         <div>
           <app-time-selection [id]="i" (valuechange)="day_part_changed(i)" [(ngModel)]="index_type.day_parts[i]"></app-time-selection>
-          <button mat-icon-button color="warn" (click)="delete_time(i)">
-            <mat-icon aria-label="Example icon-button with a heart icon">delete</mat-icon>
-          </button>
+          <button mat-icon-button color="warn" (click)="delete_time(i)"><mat-icon>delete</mat-icon></button>
         </div>
       </div>
       <div>
         <app-time-selection [id]="i" (valuechange)="add_time()" [(ngModel)]="time_to_add"></app-time-selection>
-        <button mat-icon-button color="primary" (click)="add_time()">
-            <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
-        </button>
+        <!--button mat-icon-button color="primary" (click)="add_time()"><mat-icon>add</mat-icon></button-->
       </div>
     </div>
   </div>

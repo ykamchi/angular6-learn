@@ -16,21 +16,17 @@ export class IndexComponent {
   //day_parts_values: any = []; 
   
   optional_values: any = [];
-  _current_date: Date;
+  current_date: Date;
   test: Date;
   index: any = {};
+  time_to_add: string = "Add";
   
-  //innerHeight: number;
-  //innerWidth: number;
   constructor(private route: ActivatedRoute ,private indicesService : IndicesService, private router: Router, private location: Location, private winRef: WindowRefService) { 
-    //this.innerWidth = winRef.nativeWindow.innerWidth;
-    //this.innerHeight = winRef.nativeWindow.innerHeight-240;
-    
-
     this.route.queryParams.subscribe((params: any) => {
       this.index_type = params;
     });
     this.current_date = new Date();
+    this.get_index();
     
     
     if (this.index_type.type === 'number') {
@@ -43,31 +39,51 @@ export class IndexComponent {
     }  
   } 
 
-  // onResize(event) {
-  //   this.innerWidth = event.target.innerWidth;
-  //   this.innerHeight = event.target.innerHeight-240;
-  // }
+  date_changed() {
+    console.log("current_date: this.current_date");
+    this.get_index();
+  }
 
+  delete_time(i) {
+    console.log("Delete Time");
+    this.index.day_parts.splice( i, 1 );
+    this.save_index();
+
+  }
+
+  add_time() {
+    console.log("Add Time");
+    this.index.day_parts.push({part: this.time_to_add, value: null});
+    this.save_index();
+    this.time_to_add = "Add";
+  }
+
+  /*
   public set current_date(v : Date) {
+    console.log("set Current Date");
     this._current_date = v;
     this.get_index();
   }
   
   public get current_date() : Date {
+    console.log("get Current Date");
     return this._current_date;
   }
-
+  */
   swipe(e: TouchEvent, days) {
+    console.log("Swipe: " + days);
     let tmp = new Date(this.current_date);
     tmp.setDate( this.current_date.getDate() + days );
     let today = new Date();
     if (tmp <= today) {
+      console.log("try to change date");
       this.current_date = tmp;
       this.get_index();
     }
   }
   
   open_chart() {
+    console.log("Open Chart");
     let navigationExtras: NavigationExtras = { 
             queryParams: { 
               index_id: this.index_type._id, 
@@ -79,9 +95,8 @@ export class IndexComponent {
   }
 
   save_index() {
-    
+    console.log("Save Index");
     this.indicesService.saveIndex(this.index).subscribe(data => {
-  
       this.day_parts.forEach(day_part => {
         console.log(day_part.part + " = " + day_part.value);
       });
@@ -91,14 +106,17 @@ export class IndexComponent {
   }
 
   goBack(): void {
+    console.log("Go Back");
     this.location.back();
   }
 
   get_index() {
+    console.log("Get Index");
     this.indicesService.getIndex(this.index_type._id, this.current_date).subscribe((data: any []) => {
       console.log(data);
       if (data.length == 1) {
         this.index = data[0];
+        this.index.day_parts.sort((a, b) => {return a.part > b.part});
 
       } else if (data.length == 0) { 
         console.log("created new: "+this.index);
@@ -112,6 +130,7 @@ export class IndexComponent {
           this.index_type.day_parts.forEach(dp => {
             this.index.day_parts.push({part: dp, value: null});
           });
+          this.index.day_parts.sort((a, b) => {return a.part > b.part});
         } 
       } else {
         console.log("Error: should not get more than one index for {type=t, date:d}");

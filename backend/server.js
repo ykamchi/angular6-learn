@@ -18,7 +18,8 @@ app.use(cors());
 app.use(bodyParser.json());
 app.set('secret', "Austin03"); // secret variable
 
-mongoose.connect('mongodb://localhost:27017/indices');
+//mongoose.connect('mongodb://localhost:27017/indices');
+mongoose.connect('mongodb+srv://admin:admin@cluster0-mseur.mongodb.net/indices?retryWrites=true');
 
 const connection = mongoose.connection;
 
@@ -181,7 +182,10 @@ router.route('/indices/indices.types/categories').get((req, res) => {
 router.route('/indices/indices.types/sub-categories/:category').get((req, res) => {
     let query = {}; 
     query.user = req.username;
-    IndexType.find(query).distinct('sub-category', {'category': req.params.category}, (err, ret) => {
+    if (req.params.category != "All") {
+        query.category = req.params.category
+    }
+    IndexType.find(query).distinct('sub-category', query, (err, ret) => {
         if (err) {
             console.log(err);
         } else {

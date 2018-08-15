@@ -34,6 +34,7 @@ export class ChartIndexComponent implements OnInit {
   ngOnInit() {
     console.log(this.myCanvas);
     var data1 = [];
+    var data2 = [];
     var labels = [];
     
     this.indicesService.getIndices(this.index_id).subscribe((data: any []) => {
@@ -54,6 +55,7 @@ export class ChartIndexComponent implements OnInit {
         });
         tmp.sort((a, b) => { return a.label-b.label}).forEach(element => {
           data1.push(element.data);
+          data2.push(element.data);
           labels.push(element.label);
           
         });
@@ -63,15 +65,33 @@ export class ChartIndexComponent implements OnInit {
        
         this.context = (<HTMLCanvasElement>this.myCanvas.nativeElement).getContext('2d');
         this.chart = new Chart(this.context, {
-          type: 'line',
+          type: 'bar',
               data: {
                 labels: labels,
                 datasets: [
+                  {
+                    label: 'Line Dataset',
+                    data: data2,
+                    borderColor: "blue",
+                    // Changes this dataset to become a line
+                    type: 'line'
+                  },
                   { 
                     label: "Series-1",
                     data: data1,
-                    borderColor: "greenyellow",
-                    fill: false
+                    borderColor: "red",
+                    backgroundColor: "greenyellow",
+                    fill: false,
+                    
+                    borderWidth: 2,
+                    hoverBackgroundColor: "yellow",
+                    hoverBorderColor: "black",
+                    hoverBorderWidth: 2,
+                    gridLines: {
+                      offsetGridLines: true,
+                      barPercentage: 1
+                    }
+                    
                   }
                 ]
               },

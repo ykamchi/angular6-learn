@@ -14,6 +14,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from "@angular/material/icon";
 import { MatGridListModule } from '@angular/material';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material';
 import { TimeSelectionComponent } from './controls/time-selection/time-selection.component'; 
 
 
@@ -28,7 +29,8 @@ import { TimeSelectionComponent } from './controls/time-selection/time-selection
     MatMenuModule,
     MatIconModule,
     MatGridListModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatInputModule
   ],
   declarations: [
     LayoutComponent, 

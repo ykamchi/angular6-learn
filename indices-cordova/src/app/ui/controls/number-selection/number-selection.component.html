@@ -1,16 +1,14 @@
 <!--input [(ngModel)]="val" (ngModelChange)="updateChanges()"-->
 <div>
-  <div *ngIf="show_value" class="border border-light" style="text-align:center">
-    {{val ? val : "Edit"}}
-  </div>
+  <div style="font-size: 8px; text-align:center">{{label}}</div>
+    
   <div class="funkyradio" [style.height]="height">
     <ng-container *ngFor="let param of optional_values">
-
         <input type="radio" name="radio" [id]="'radio'+param.value" [value]="val" [checked]="param.value == val" (change)="selectionChanged(param.value)"/>
         <label [for]="'radio'+param.value" [ngClass]="param.value == val ? columns_class[container_size] + ' selected' : columns_class[container_size] + ' not-selected'">{{param.name}}</label>
     </ng-container>
   </div>
-  <div style="font-size: 8px; text-align:center">
-    {{label}}
-  </div>
+
+  <div *ngIf="show_value" class="border border-light" style="text-align:center">{{val ? val : "Edit"}}</div>
+  
 </div>

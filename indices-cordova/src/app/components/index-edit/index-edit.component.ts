@@ -12,13 +12,23 @@ import { Location } from '@angular/common';
 })
 export class IndexEditComponent implements OnInit {
   index_type: {};
-  name: {};
+  categories: string[];
+  sub_categories: string[];
+  selected_category: string = '';
   time_to_add: string = "Add";
   constructor(private route: ActivatedRoute
               ,private indicesTypesService : IndicesTypesService
               ,private modalService: NgbModal
               , private location: Location) { 
-    this.name = {x:"ss"};
+    
+    this.indicesTypesService.getCategories().subscribe((data: string[]) => {
+      this.categories = data;
+      
+    });
+    this.indicesTypesService.getSubCategories("All").subscribe((data: string[]) => {
+      this.sub_categories = data;
+    });
+
     this.route.queryParams.subscribe((params: any) => {
       if (params.index_type) {
         console.log("edit index");
@@ -42,6 +52,7 @@ export class IndexEditComponent implements OnInit {
           user: localStorage.getItem('currentuser')
         }
       }
+     
     });
   }
 
@@ -84,6 +95,7 @@ export class IndexEditComponent implements OnInit {
     console.log("Add Time");
     this.index_type['day_parts'].push(this.time_to_add);
     this.update_index();
+    this.time_to_add = "Add";
 
   }
 

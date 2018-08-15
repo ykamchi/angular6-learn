@@ -66,32 +66,32 @@ export class TimeSelectionComponent implements OnInit {
               {name: "45", value: "45"},
               {name: "50", value: "50"},
               {name: "55", value: "55"}]
-  private internal_show: boolean=false;
+  private show: boolean=false;
 
   constructor() {
     
   }
 
   selectionChanged(newVal) {
-    console.log("*** selectionChanged");
+    console.log("[time-selection] selectionChanged");
     this.val = newVal;
     //this.onChange(this.val);
     //this.valuechange.emit(event);    
   }
-  
-  public set show(v : boolean) {
+  /*
+  private set show(v : boolean) {
     this.internal_show = v;
-    console.log("SHOW SET: " + this.internal_show + " TIME: " + this.val);
+    console.log("SHOW SET: " + this.internal_show);
   }
   
   
-  public get show() : boolean {
-    console.log("SHOW GET: " + this.internal_show + " TIME: " + this.val);
+  private get show() : boolean {
+    console.log("SHOW GET: " + this.internal_show);
     return this.internal_show;
   }
-  
+  */
   close(ok) {
-    console.log("COLSE");
+    console.log("[time-selection] close: " + ok);
     if (ok) {
       this.initial_value = this.val;
       this.onChange(this.val);
@@ -103,20 +103,20 @@ export class TimeSelectionComponent implements OnInit {
   }
 
   toggle(e) {
-    console.log("TOGGLE " + e.x + "," + e.y);
+    console.log("[time-selection] toggle: " + e.x + "," + e.y);
     this.mouse_click_position = {x: e.x, y: e.y};
     this.show = !this.show;
     
   }
      
   public get val() : string {
-    //console.log("Getting val: "+ this.hour + ":" + this.minute);
+    console.log("[time-selection] get val: "+ this.hour + ":" + this.minute);
     return this.hour + ":" + this.minute
   
   }
    
   public set val(v : string) {
-      console.log("Setting val: "+ v);
+      console.log("[time-selection] set val: "+ v);
       if (v) {
         var myRegexp = /(\d*):(\d*)/g;
         var match = myRegexp.exec(v);
@@ -133,21 +133,21 @@ export class TimeSelectionComponent implements OnInit {
    * Invoked when the model has been changed
    */
   onChange: (_: any) => void = (_: any) => {
-    console.log("** onChange");
+    console.log("[time-selection] onChange");
   };
 
   /**
    * Invoked when the model has been touched
    */
   onTouched: () => void = () => {
-    console.log("** onTouched");
+    console.log("[time-selection] onTouched");
   };
   
   /**
    * Method that is invoked on an update of a model.
    */
   updateChanges() {
-    console.log("** updateChanges");
+    console.log("[time-selection] updateChanges");
     //this.onChange(this.val);
     //this.valuechange.emit(event);    
   }
@@ -161,7 +161,7 @@ export class TimeSelectionComponent implements OnInit {
    * @param value the value
    */
   writeValue(value: string): void {
-    console.log("*** writeValue"+value);
+    console.log("[time-selection] writeValue"+value);
     this.val = value;
     this.initial_value = value;
     //this.onChange(this.val);
@@ -184,13 +184,13 @@ export class TimeSelectionComponent implements OnInit {
   }
 
   change_hour() {
-    console.log("====>>>>" + this.val);
+    console.log("[time-selection] change_hour: " + this.val);
     //this.onChange(this.val);
     //this.valuechange.emit(event);
   }
   
   change_minute() {
-    console.log("====>>>>" + this.val);
+    console.log("[time-selection] change_minute: " + this.val);
     //this.onChange(this.val);
     //this.valuechange.emit(event);
     //this.show = false;

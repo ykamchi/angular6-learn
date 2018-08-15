@@ -9,13 +9,14 @@ import { MatButtonModule } from '@angular/material';
 import { MatGridListModule } from '@angular/material';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from "@angular/material/icon"; 
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 
 
 
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 
 import { AuthModule } from './auth/auth.module'
 import { AuthGuard } from './auth/auth.guard'
@@ -36,6 +37,8 @@ import { ChartIndexComponent } from './components/charts/index/chartindex.compon
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { IndexEditComponent } from './components/index-edit/index-edit.component';
 import { JwtInterceptor, ErrorInterceptor } from './helpers';
+import { ConfigService } from './services/config.service';
+
 
 
 
@@ -45,6 +48,13 @@ export class CustomHammerConfig extends HammerGestureConfig  {
         'rotate': { enable: false }
     }
 } 
+
+const appInitializerFn = (appConfig: ConfigService) => {
+  return () => {
+    console.log("appInitializerFn");
+    return appConfig.loadConfig();
+  };
+};
 
 const routes: Routes = [
   { path: 'main', component: MainComponent, canActivate: [AuthGuard] },
@@ -86,14 +96,22 @@ const routes: Routes = [
     MatCardModule,
     MatCheckboxModule,
     MatIconModule,
+    MatAutocompleteModule,
     NgxMaterialTimepickerModule.forRoot()
   ],
   providers: [ 
+    {
+      provide: APP_INITIALIZER,
+      useFactory: appInitializerFn,
+      multi: true,
+      deps: [ConfigService]
+    },
     WindowRefService,
     {
       provide: HAMMER_GESTURE_CONFIG,
       useClass: CustomHammerConfig
     },
+    
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
 

@@ -1,24 +1,17 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { ConfigService } from '../services/config.service';
 
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-    uri = 'http://10.0.0.12:4000';
     
-
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient, private config: ConfigService) {}
 
     login(username: string, password: string) {
-        /*return this.http.post<any>(`${this.uri}/indices/users/auth`, { username: `${username}`, password: `${password}` }).subscribe((res) => {
-            console.log("store currentUser");
-            if (res && res.token) {
-                // store username and jwt token in local storage to keep user logged in between page refreshes
-                localStorage.setItem('currentUser', JSON.stringify({ username, token: res.token }));
-            }
-        });*/
-        return this.http.post<any>(`${this.uri}/indices/users/auth`, { username: `${username}`, password: `${password}` })
+        let uri = this.config.getParam('backend_uri');
+        return this.http.post<any>(`${uri}/indices/users/auth`, { username: `${username}`, password: `${password}` })
             .pipe(map((res:any) => {
                 // login successful if there's a jwt token in the response
                 console.log("store currentUser"+res.token);
@@ -33,8 +26,8 @@ export class AuthService {
     }
 
     register(username: string, password: string) {
-        console.log("register");
-        return this.http.post<any>(`${this.uri}/indices/users/reg`, { username: `${username}`, password: `${password}` });
+        let uri = this.config.getParam('backend_uri');
+        return this.http.post<any>(`${uri}/indices/users/reg`, { username: `${username}`, password: `${password}` });
     }
 
     logout() {

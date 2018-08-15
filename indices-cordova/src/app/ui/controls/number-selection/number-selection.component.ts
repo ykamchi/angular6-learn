@@ -32,52 +32,51 @@ export class NumberSelectionComponent implements ControlValueAccessor, OnInit {
     if (!this.height) this.height = "230px";
   }
   
-  private local_val: number = -1;
+  private val: number = -1;
 
   selectionChanged(newVal) {
-    console.log("** selectionChanged");
+    console.log("[number-selection] selectionChanged: " + newVal);
     this.val = newVal;
     this.onChange(this.val);
     this.valuechange.emit(event);    
   }
 
-  
+  /*
   public set val(v : number) {
-    console.log("** set");
+    console.log("[number-selection] set val: " + v);
     this.local_val = v;
     //this.valuechange.emit(event);
   }
   
   
   public get val() : number {
-    //console.log("** get");
+    console.log("[number-selection] get val");
     return this.local_val;
   }
-  
+  */
   ngOnInit() {
 
-    console.log("xxxx" + this.container_size);
-
   }
+
   /**
    * Invoked when the model has been changed
    */
   onChange: (_: any) => void = (_: any) => {
-    console.log("** onChange");
+    console.log("[number-selection] onChange");
   };
 
   /**
    * Invoked when the model has been touched
    */
   onTouched: () => void = () => {
-    console.log("** onTouched");
+    console.log("[number-selection] onTouched");
   };
   
   /**
    * Method that is invoked on an update of a model.
    */
   updateChanges() {
-    console.log("** updateChanges");
+    console.log("[number-selection] updateChanges");
     this.onChange(this.val);
     this.valuechange.emit(event);    
   }
@@ -91,7 +90,7 @@ export class NumberSelectionComponent implements ControlValueAccessor, OnInit {
    * @param value the value
    */
   writeValue(value: number): void {
-    console.log("** writeValue"); 
+    console.log("[number-selection] writeValue"); 
     this.val = value;
     //this.onChange(this.val);
   }

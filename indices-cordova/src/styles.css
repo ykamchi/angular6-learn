@@ -2,11 +2,12 @@
 @import "~bootstrap/dist/css/bootstrap.css";
 @import "~font-awesome/css/font-awesome.css";
 /*
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
-@import "~@angular/material/prebuilt-themes/pink-bluegrey.css";
 
-*/
+@import "~@angular/material/prebuilt-themes/pink-bluegrey.css";
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+*/
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "https://fonts.googleapis.com/icon?family=Material+Icons";
 
 
 
@@ -29,7 +30,7 @@
 
 
 .app-top-panel {
-  background:rgb(81, 82, 80);
+  background:/*rgb(81, 82, 80);*/rgba(39, 31, 11, 0.24);  
   color:white;
   width: 100%;
   top:0px;
@@ -40,7 +41,7 @@
 }
 
 .btn-panel {
-  background:rgb(81, 82, 80);
+  background:/*rgb(81, 82, 80);*/rgba(39, 31, 11, 0.24);
   color:white;
   width: 100%;
   bottom:0px;

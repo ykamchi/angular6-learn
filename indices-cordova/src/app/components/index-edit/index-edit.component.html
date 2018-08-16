@@ -35,7 +35,7 @@
         
       </mat-form-field> 
     </mat-grid-tile>
-
+    
 
     <mat-grid-tile colspan="6" rowspan="1">
       <mat-form-field style="width: 100%">
@@ -66,6 +66,9 @@
       </mat-grid-tile>
     </div>      
   </mat-grid-list>
+  <br>
+  <br>
+  Default Tracking Time:
   <div class="container-fluid">
     <div class="row" style="padding-bottom: 5px">
       <div class="col-4" *ngFor="let day_part of index_type.day_parts ; let i = index" style="padding: 0px;padding-bottom: 5px">
@@ -81,19 +84,27 @@
     </div>
   </div>
   <br>
+  <br>
   {{index_type.hidden ? 'This index is hidden ... click "Show" if you like to see it on the main page': ''}}
-  <div class="button-row" style="width:100%">
-    <button mat-stroked-button [color]="index_type.hidden ? 'primary' : 'warn'" (click)="index_type.hidden = ! index_type.hidden">{{index_type.hidden ? 'Show' : 'Hide'}}</button>    
-    <button mat-stroked-button color="primary" (click)="clone_index()">Clone</button>  
-
-    <button mat-stroked-button color="warn" (click)="delete_index()">Delete</button>    
-    
-  </div>
-
+  
 
 </div>
 <div class="btn-panel">
-    <div class="button-row">
-      <button mat-icon-button [color]="primary" (click)="goBack()"><mat-icon>replay</mat-icon></button> 
+  <div class="container-fluid"> 
+    <div class="row" style=""> 
+      <div class="col-6 col-sm-6 col-md-6 col-lg-6" style="padding: 0px">
+        <div class="button-row" style="text-align: left">
+          <button mat-icon-button [color]="'warn'" (click)="delete_index()"><mat-icon>delete</mat-icon></button> 
+          <button mat-icon-button [color]="index_type.hidden ? 'primary' : 'warn'" (click)="index_type.hidden = ! index_type.hidden"><mat-icon>block</mat-icon></button> 
+        </div>
+      </div>
+      <div class="col-6 col-sm-6 col-md-6 col-lg-6"  style="padding: 0px">
+        <div class="button-row">
+          <button mat-icon-button [color]="'primary'" (click)="goBack()"><mat-icon>replay</mat-icon></button> 
+        </div>
+                
+      </div>
     </div>
+  </div>
 </div>
+

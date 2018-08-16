@@ -17,8 +17,18 @@
 </div>
 
 <div class="btn-panel">
-  <div class="button-row">
-      <button mat-icon-button [color]="primary" (click)="goBack()"><mat-icon>replay</mat-icon></button> 
-    
-  </div>
+    <div class="container-fluid"> 
+        <div class="row" style=""> 
+            <div class="col-6 col-sm-6 col-md-6 col-lg-6" style="padding: 0px">
+                <div class="button-row" style="text-align: left">
+                    
+                </div>
+            </div>
+            <div class="col-6 col-sm-6 col-md-6 col-lg-6" style="padding: 0px">
+                <div class="button-row" style="text-align: right">
+                    <button mat-icon-button [color]="'primary'" (click)="goBack()"><mat-icon>replay</mat-icon></button> 
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

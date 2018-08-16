@@ -32,12 +32,16 @@
                         <app-number-selection height="190px" (valuechange)="save_index()" [label]="day_part.part" [optional_values]="optional_values" [(ngModel)]="day_part.value"></app-number-selection>
                         <button mat-icon-button color="warn" (click)="delete_time(i)"><mat-icon>delete</mat-icon></button>
                     </div>
-                    
+                    <div class="col-3 col-sm-3 col-md-2 col-lg-2" style="text-align: center">
+                            
+                        <div style="padding-top: 100%">
+                            
+                            <app-time-selection [id]="i" (valuechange)="add_time()" [(ngModel)]="time_to_add" style="text-align: center"></app-time-selection>
+                            
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <app-time-selection [id]="i" (valuechange)="add_time()" [(ngModel)]="time_to_add"></app-time-selection>
-                    <!--button mat-icon-button color="primary" (click)="add_time()"><mat-icon>add</mat-icon></button-->
-                </div>
+                
             </div>
             <div *ngSwitchCase="'sample'">
                     sample
@@ -52,8 +56,18 @@
     </div>
 </div>
 <div class="btn-panel">
-    <div class="button-row">
-        <button mat-icon-button (click)="open_chart()"><mat-icon>insert_chart</mat-icon></button> 
-        <button mat-icon-button (click)="goBack()"><mat-icon>replay</mat-icon></button> 
+    <div class="container-fluid"> 
+        <div class="row" style=""> 
+            <div class="col-6 col-sm-6 col-md-6 col-lg-6" style="padding: 0px">
+                <div class="button-row" style="text-align: left">
+                    <button mat-icon-button [color]="'primary'" (click)="open_chart()"><mat-icon>insert_chart</mat-icon></button> 
+                </div>
+            </div>
+            <div class="col-6 col-sm-6 col-md-6 col-lg-6" style="padding: 0px">
+                <div class="button-row" style="text-align: right">
+                    <button mat-icon-button [color]="'primary'" (click)="goBack()"><mat-icon>replay</mat-icon></button> 
+                </div>
+            </div>
+        </div>
     </div>
 </div>

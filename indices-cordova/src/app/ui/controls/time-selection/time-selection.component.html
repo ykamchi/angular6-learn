@@ -1,4 +1,9 @@
-<input class="timeinput" type="text" [(ngModel)]="initial_value" (click)="toggle($event)" (ngModelChange)="updateChanges()" readOnly="readOnly">
+
+<div *ngIf="initial_value == 'Add'">
+    <input class="timeinput" type="text" (click)="toggle($event)" readOnly="readOnly" [(ngModel)]="initial_value">
+    <button   mat-icon-button color="primary" (click)="toggle($event)"><mat-icon>add</mat-icon></button>
+</div>
+<input *ngIf="initial_value != 'Add'" class="timeinput" type="text" [(ngModel)]="initial_value" (click)="toggle($event)" (ngModelChange)="updateChanges()" readOnly="readOnly">
 <div id="overlay"  [style.display]="show ? 'block' : 'none'" (click)="close(false)">
 </div>
 <div class="timepicker" [style.display]="show ? 'block' : 'none'">

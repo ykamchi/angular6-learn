@@ -42,16 +42,40 @@
           
         </div>
       </div>
+
+      <div ngClass="col-6 col-sm-4 col-md-3 col-lg-3" style="padding: 5px">
+        <div class="box-shadow" style="height: 100%">
+          <div style="text-align: center;padding:5px" (click)="new_index()">
+            <h5 class="h5-caption" color="primary">🆕</h5>
+            <span><h6 style="text-align: center;word-wrap: break-word;height: 45px"  >Create New Index</h6></span>
+            <span style="font-size: 10px"></span>
+          </div>
+          <div style="text-align: right">
+            <!--button mat-icon-button color="primary" (click)="clone_index(index_type)"><mat-icon>file_copy</mat-icon></button>
+            <button mat-icon-button color="primary" (click)="edit_index(index_type)"><mat-icon>edit</mat-icon></button-->
+            
+          </div>
+          
+        </div>
+      </div>
+
+
+
     </div>
   </div>
 </div>
 
 <div class="btn-panel">
-  <div class="button-row">
-    {{show_hidden ? 'Only Active:' : 'Show hidden:'}}<button mat-icon-button [style.color]="show_hidden ? 'red' : 'white'" (click)="show_hidden = !show_hidden"><mat-icon>block</mat-icon></button> 
-    Add:<button mat-icon-button (click)="new_index()"><mat-icon>add</mat-icon></button> 
-    Filter:<button mat-icon-button (click)="toggle_filter()"><mat-icon>filter_list</mat-icon></button> 
-    
+  <div class="container-fluid"> 
+    <div class="row" style=""> 
+      <div class="col-6 col-sm-6 col-md-6 col-lg-6" style="padding: 0px">
+        <div class="button-row" style="text-align: left">
+          <button mat-icon-button [color]="show_hidden ? 'warn' : 'primary'" (click)="show_hidden = !show_hidden"><mat-icon>block</mat-icon></button>
+          <button mat-icon-button [color]="'primary'" (click)="toggle_filter()"><mat-icon>filter_list</mat-icon></button> 
+        </div>
+
+      </div>
+    </div>
   </div>
 </div>
 

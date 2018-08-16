@@ -16,8 +16,8 @@ import {NG_VALUE_ACCESSOR} from "@angular/forms";
 export class TimeSelectionComponent implements OnInit {
   @Input() label = "selection";
   @Output() valuechange = new EventEmitter(); // add this
-  private minute: string;
-  private hour: string;
+  private minute: string = "00";
+  private hour: string = "00";
   private initial_value: string;
   private mouse_click_position: {x: 0, y: 0};
 
@@ -105,6 +105,7 @@ export class TimeSelectionComponent implements OnInit {
 
   toggle(e) {
     //console.log("[time-selection] toggle: " + e.x + "," + e.y);
+    
     this.mouse_click_position = {x: e.x, y: e.y};
     this.show = !this.show;
     

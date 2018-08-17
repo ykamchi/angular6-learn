@@ -18,8 +18,8 @@ app.use(cors());
 app.use(bodyParser.json());
 app.set('secret', "Austin03"); // secret variable
 
-//mongoose.connect('mongodb://localhost:27017/indices');
-mongoose.connect('mongodb+srv://admin:admin@cluster0-mseur.mongodb.net/indices?retryWrites=true', function(err) {
+mongoose.connect('mongodb://localhost:27017/indices', function(err) {
+//mongoose.connect('mongodb+srv://admin:admin@cluster0-mseur.mongodb.net/indices?retryWrites=true', function(err) {
 	if (err) 
 		console.log("error connecting to DB: " + err)
 }
@@ -340,7 +340,8 @@ router.route('/indices/indices.values/save').post((req, res) => {
                 
 
                 index.save().then(index => {
-                    res.json('Update done');
+                    res.status(200).json({'index': 'Updated successfully'});
+                    //res.json('Update done');
                     console.log("OK=====>"+index.day_parts[3].value);
                 }).catch(err => {
                     res.status(400).send('Update failed');

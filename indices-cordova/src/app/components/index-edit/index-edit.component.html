@@ -64,6 +64,10 @@
           <input matInput type="text" placeholder="Step" [(ngModel)]="index_type.step">
         </mat-form-field>  
       </mat-grid-tile>
+      <mat-grid-tile colspan="4" rowspan="1">
+        <mat-checkbox [(ngModel)]="index_type.hidden">Hidden</mat-checkbox>
+      </mat-grid-tile>
+  
     </div>      
   </mat-grid-list>
   <br>

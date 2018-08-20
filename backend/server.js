@@ -271,7 +271,6 @@ router.route('/indices/indices.types/update/:id').post((req, res) => {
     }
 }); 
 
-
 router.route('/indices/indices.values/:type_id/:date').get((req, res) => {
     
     if (!req.params.type_id || !req.params.date) {
@@ -299,12 +298,25 @@ router.route('/indices/indices.values/:type_id/:date').get((req, res) => {
 router.route('/indices/indices.values/:type_id').get((req, res) => {
     
     if (!req.params.type_id) {
-        res.json('error - date is required');
+        res.json('error - type is required');
     } else {
 
-        let query = { index_type_id: new ObjectId(req.params.type_id)}; 
-        query.user = req.username;
-        IndexValue.find(query).sort('-date').exec((err, ret) => {
+        let query = { user : req.username };
+        if (req.params.type_id != "all") {
+            query._id = new ObjectId(req.params.type_id); 
+
+        } else {
+            query.hidden = false;
+        }
+        
+        IndexType.aggregate([
+            { "$match": query},
+            //{ "$match": {_id: new ObjectId(req.params.type_id)}},
+            { "$lookup": { from: 'indices.values', localField: '_id', foreignField: 'index_type_id', as: 'index_values' } },
+            { "$sort" : {"index_values.date": -1}},
+        ]).exec((err, ret) => {
+
+//        IndexValue.aggregate([{ "$match": query }, { $lookup: { from: 'indices.types', localField: 'index_type_id', foreignField: '_id', as: 'index_type' } }]).sort('-date').exec((err, ret) => {
             if (err) {
                 console.log(err);
             } else {
@@ -342,7 +354,7 @@ router.route('/indices/indices.values/save').post((req, res) => {
                 index.save().then(index => {
                     res.status(200).json({'index': 'Updated successfully'});
                     //res.json('Update done');
-                    console.log("OK=====>"+index.day_parts[3].value);
+                    //console.log("OK=====>"+index.day_parts[3].value);
                 }).catch(err => {
                     res.status(400).send('Update failed');
                 });

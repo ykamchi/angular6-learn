@@ -57,18 +57,6 @@ export class IndexComponent {
     this.time_to_add = "Add";
   }
 
-  /*
-  public set current_date(v : Date) {
-    //console.log("set Current Date");
-    this._current_date = v;
-    this.get_index();
-  }
-  
-  public get current_date() : Date {
-    //console.log("get Current Date");
-    return this._current_date;
-  }
-  */
   swipe(e: TouchEvent, days) {
     //console.log("Swipe: " + days);
     let tmp = new Date(this.current_date);

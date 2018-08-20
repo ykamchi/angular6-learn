@@ -22,37 +22,67 @@ export class ChartIndexComponent implements OnInit {
   
   constructor(private indicesService : IndicesService, private route: ActivatedRoute, private location: Location) { 
     this.route.queryParams.subscribe((params: any) => {
-      this.index_id = params.index_id;
-      this.index_caption = params.index_caption;
-      this.index_emoji = params.index_emoji;
-      
-      
+      if (params.index_id) {
+        this.index_id = params.index_id;
+        this.index_caption = params.index_caption;
+        this.index_emoji = params.index_emoji;
+      }  else {
+        this.index_id = "all";
+      }
     });
+  }
+
+  getPartDateTime(date, part) {
+    var myRegexp = /(\d*):(\d*)/g;
+    var match = myRegexp.exec(part.part);
+    return new Date(date).setHours(parseInt(match[1]),parseInt(match[2]),0,0);
+  }
+
+  getRandomColor() {
+    var color = Math.floor(0x1000000 * Math.random()).toString(16);
+    return '#' + ('000000' + color).slice(-6);
   }
 
   ngOnInit() {
     var data1 = [];
-    var data2 = [];
     var labels = [];
     
+    var graph_data = [];
+
     this.indicesService.getIndices(this.index_id).subscribe((data: any []) => {
-      
+      console.log(this.getRandomColor());
+      console.log(data);
       if (data && data.length > 0) {
-        let tmp = [];
-        data.forEach(index => {
-          if (index.day_parts && index.day_parts.length > 0) {
-            index.day_parts.sort(function(a, b){return a.value-b.value}).reverse().forEach(part => {
-              var myRegexp = /(\d*):(\d*)/g;
-              var match = myRegexp.exec(part.part);
-              let date_time = new Date(index.date).setHours(parseInt(match[1]),parseInt(match[2]),0,0);
-              tmp.push({label: date_time, data: part.value});
-            });
-          }
-        });
-        tmp.sort((a, b) => { return a.label-b.label}).forEach(element => {
-          data1.push(element.data);
-          data2.push(element.data);
-          labels.push(element.label);
+        data.forEach(index_type => {
+          console.log("index_type: " + index_type);
+          let tmp = [];
+          index_type.index_values.forEach(index => {
+            console.log("index: " + index);
+            if (index.day_parts && index.day_parts.length > 0) {
+              index.day_parts.sort(function(a, b){return a.part-b.part}).reverse().forEach(part => {
+                console.log("==>" + this.getPartDateTime(index.date, part) + ":"+part.value);
+                tmp.push({label: this.getPartDateTime(index.date, part), data: part.value});
+              });
+            }
+          });
+          let d = [];
+          let l = [];
+          tmp.sort((a, b) => { return a.label-b.label}).forEach(element => {
+            d.push({ "x" : element.label, "y": element.data});
+            
+          });
+          graph_data.push(
+            { 
+              label: index_type.caption, 
+              data: d, 
+              labels: l, 
+              borderColor: this.getRandomColor(),
+              backgroundColor: '#FFFFFF00',
+              cubicInterpolationMode: 'monotone',
+              spanGaps: false
+
+            }
+          );
           
         });
       } else {
@@ -61,35 +91,9 @@ export class ChartIndexComponent implements OnInit {
        
         this.context = (<HTMLCanvasElement>this.myCanvas.nativeElement).getContext('2d');
         this.chart = new Chart(this.context, {
-          type: 'bar',
+          type: 'line',
               data: {
-                labels: labels,
-                datasets: [
-                  {
-                    label: 'Line Dataset',
-                    data: data2,
-                    borderColor: "blue",
-                    // Changes this dataset to become a line
-                    type: 'line'
-                  },
-                  { 
-                    label: "Series-1",
-                    data: data1,
-                    borderColor: "red",
-                    backgroundColor: "greenyellow",
-                    fill: false,
-                    
-                    borderWidth: 2,
-                    hoverBackgroundColor: "yellow",
-                    hoverBorderColor: "black",
-                    hoverBorderWidth: 2,
-                    gridLines: {
-                      offsetGridLines: true,
-                      barPercentage: 1
-                    }
-                    
-                  }
-                ]
+                datasets: graph_data
               },
               options: {
                 legend: {
@@ -102,17 +106,17 @@ export class ChartIndexComponent implements OnInit {
                     display: true,
                     time: {
                       displayFormats: {
-                        max: 'YYYY',
-                        min: 'MMM YY',
-                        'millisecond': 'SSS [ms]',
-                        'second': 'h:mm:ss a', // 11:20:01 AM
-                        'minute': 'h:mm:ss a', // 11:20:01 AM
-                        'hour': 'MMM D, hA', // Sept 4, 5PM
+                        //max: 'YYYY',
+                        //min: 'MMM YY',
+                        //'millisecond': 'SSS [ms]',
+                        //'second': 'h:mm:ss a', // 11:20:01 AM
+                        //'minute': 'h:mm:ss a', // 11:20:01 AM
+                        //'hour': 'MMM D, hA', // Sept 4, 5PM
                         'day': 'MMM Do', // Sep 4 2015
-                        'week': 'll', // Week 46, or maybe "[W]WW - YYYY" ?
-                        'month': 'MMM YYYY', // Sept 2015
-                        'quarter': '[Q]Q - YYYY', // Q3
-                        'year': 'YYYY', // 2015
+                        //'week': 'll', // Week 46, or maybe "[W]WW - YYYY" ?
+                        //'month': 'MMM YYYY', // Sept 2015
+                        //'quarter': '[Q]Q - YYYY', // Q3
+                        //'year': 'YYYY', // 2015
                     },
                       tooltipFormat: 'll'
                     },

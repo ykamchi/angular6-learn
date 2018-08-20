@@ -1,7 +1,7 @@
 <div [ngClass]="'content-no-head-panel'">
   <div (swiperight)="swipe($event, -1)" (swipeleft)="swipe($event, 1)" >
     <br>
-    <div style="text-align: center">
+    <div *ngIf="index_id != 'all'" style="text-align: center">
         <br>
         <h2>{{index_caption}}</h2>
         <br>

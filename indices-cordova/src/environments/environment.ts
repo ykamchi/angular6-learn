@@ -3,8 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: true,
-  backend_uri: "http://91.202.168.151:4000"
+  production: false,
+  //backend_uri: "http://91.202.168.151:4000"
+  backend_uri: "http://10.0.0.8:4000"
 };
 
 /*
